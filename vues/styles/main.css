@@ -75,6 +75,9 @@ body {
 
         /* sur 3 col */
         .col-3-1 { width: 30%; }
+
+        /* sur 2 col */
+        .col-2-1 { width: 40%; }
         
         /* marges */
         .col-5-4 { margin-right: 0; }
@@ -171,7 +174,7 @@ body {
                     border-width: 0 5px;
                     box-shadow: 4px 4px 0 #dbd3d3;
                     text-align: left;
-                    color: #c9cce5;
+                    color: #d0d1ea;
                     column-count: 2;
                     column-gap: 40px;
                     column-rule: 1px solid #8286a8;
@@ -219,7 +222,7 @@ body {
 
 
 
-        /* MENU (#personnesListe, #profilStyles) */
+        /* MENU (#personnesListe, #commonStyles) */
                 
                 /* filtrer, défiltrer */
 
@@ -447,7 +450,7 @@ body {
 
                 #personnesListe p a {
                     text-decoration: none;
-                    color: #cfd0ed;
+                    color: #d0d1ea;
                 }
 
                 #personnesListe p a:hover {
@@ -468,9 +471,9 @@ body {
 
 
 
-        /* PROFIL */
+        /* PROFIL, COMPTE, ADMIN.. */
         
-        #profilStyles {
+        #commonStyles {
             max-width: 100%;
             padding: 40px 0 20px 0;
         }
@@ -478,29 +481,30 @@ body {
 
             /* menu */
 
-            #profilStyles menu {
+            #commonStyles menu {
                 display: block;
                 margin-top: 0;
                 border: none;
                 border-radius: 0;
                 box-shadow: 0 6px 0 #dbd3d3;
             }
-            #profilStyles menu h3 { margin: 0; }
+            #commonStyles menu h3 { margin: 0; }
 
 
             /* titre */
 
-            #profilStyles h1 { text-align: center; }
-            #profilStyles h1 span { margin-left: 0; }
+            #commonStyles h1 { text-align: center; }
+            #commonStyles h1 span { margin-left: 0; }
 
 
             /* containers personne et projets */
 
-            #profilStyles article {
+            #commonStyles article {
                 text-align: center;    
+                background-color: #d1c5c5;
             }
 
-            #profilStyles article {
+            #commonStyles article {
                 width: 100%;
                 margin-top: 40px;
                 margin-bottom: 20px;
@@ -508,15 +512,11 @@ body {
                 border-width: 1px 0;
             }
 
-            #profilStyles #personneProfil {
+            #commonStyles #personneProfil {
                 background-color: #4b4e6d;
             }
 
-            #profilStyles .projetProfil {
-                background-color: #d1c5c5;
-            }
-
-            #profilStyles article div.wrapper {
+            #commonStyles article div.wrapper {
                 max-width: 1000px;
                 margin: auto;
             }
@@ -524,18 +524,32 @@ body {
 
                 /* parties dans chaque containers */
 
-                #profilStyles article div div {
+                #commonStyles article div div {
                     display: inline-block;
-                    vertical-align: middle;
+                    vertical-align: top;
                     min-width: 250px;
                 }
 
-                    #profilStyles article div div p {
+                .connexion div div { margin: 0 1%; }
+
+                .connexion div div:first-child {
+                    background-color: #d9d0d0;
+                    border: 0 solid white;
+                    border-width: 0 1px 1px 1px;
+                }
+                .connexion div div:last-child {
+                    background-color: #57597b;
+                    border: 0 solid #4b4e6d;
+                    border-width: 0 5px;
+                }
+
+                    #commonStyles article div div p {
                         margin: 15px;
                         padding: 1px 8px 1px 10px;
                         border-radius: 2px;
                         text-align: left;
                     }
+
 
                     .projetProfil div div:first-child p:first-child {
                         font-variant: small-caps;
@@ -544,40 +558,56 @@ body {
 
                         /* les textes */
 
-                        #profilStyles article div div p span {
-                            padding: 1px 8px;
-                            margin: 0 10px 0 -10px;
-                            border-radius: 2px 0 0 2px;
-                            background-color: #62b2b2;
-                            color: #0c6464;
+                        .connexion div div h2 {
+                            background-color: rgba(255,255,255,0.5);
+                            font-variant: small-caps;
+                            font-weight: normal;
+                        }
+
+                        .connexion div div h2 { color: #218c9a; }
+                        .connexion div div:last-child h2 {
+                            background-color: rgba(255,255,255,0.1);
+                            color: #d0d1ea;
                         }
 
                         #personneProfil div div p {
                             background-color: #57597b;
-                            color: #babbd0;
+                            color: #d0d1ea;
                         }
                         .projetProfil div div p {
                             background-color: #baa4a4;
                             color: #2e2323;
                         }
 
+                            #commonStyles article div div p span,
+                            #commonStyles div div form p label {
+                                padding: 1px 8px;
+                                margin: 0;
+                                border-radius: 2px 0 0 2px;
+                                background-color: #62b2b2;
+                                color: #145858;
+                            }
+
+                            #commonStyles article div div p span {
+                                margin: 0 10px 0 -10px;
+                            }
+
 
                         /* les liens */
 
-                        #personneProfil div div p a { color: #c6caf2; }
+                        #personneProfil div div p a { color: #d0d1ea; }
                         .projetProfil div div p a { color: #4d2222; }
-
-                        #profilStyles article div div p a:hover { color: #fff; }
+                        #commonStyles article div div p a:hover { color: #fff; }
 
 
                         /* les listes de tags */
 
-                        #profilStyles p.tagList {
+                        #commonStyles p.tagList {
                             padding: 0;
                             background-color: initial;
                         }
 
-                        #profilStyles p.tagList span {
+                        #commonStyles p.tagList span {
                             display: inline-block;
                             margin: 2px 4px 2px 0;
                             border-radius: 2px;
@@ -586,41 +616,58 @@ body {
                         }
 
 
-                    /* les images */
+                        /* les formulaires */
 
-                    #personneProfil div div:first-child { background-color: #57597b; }
+                        #commonStyles div div form { padding: 0 10px 20px; }
 
-                    .projetProfil div div:last-child { background-color: #b7a6a6; }
+                            #commonStyles div div form p {
+                                margin: 5px auto;
+                                text-align: center;
+                            }
 
-                    #profilStyles article div div img {
-                        margin: 5px 1.5% 0 1.5%;
-                        width: 97%;
-                        border-radius: 2px;
-                    }
+                                #commonStyles div div form p * {
+                                    display: inline-block;
+                                    width:48%;
+                                }
+
+
+                        /* les images */
+
+                        #personneProfil div div:first-child { background-color: #57597b; }
+                        .projetProfil div div:last-child { background-color: #b7a6a6; }
+
+                        #commonStyles article div div img {
+                            margin: 5px 1.5% 0 1.5%;
+                            width: 97%;
+                            border-radius: 2px;
+                        }
+
 
         @media (max-width: 800px) {
-            #profilStyles { padding: 40px 0 20px 0; }
-            #profilStyles menu h1 { /* IE */
+            #commonStyles { padding: 40px 0 20px 0; }
+            #commonStyles menu h1 { /* IE */
                 text-align: left;
                 font-size: 1.5rem;
             }
-            #profilStyles article { padding: 0; }
-            #profilStyles article div div {
+            #commonStyles article { padding: 0; }
+            #commonStyles article div div {
                 text-align: center;
                 vertical-align: top;
             }
-            #profilStyles article div div img {
+            #commonStyles article div div img {
                 max-width: 450px;
                 border-radius: 2px;
                 border: 0;
             }
+            #commonStyles div div form p * { width: 100%; }
+            #commonStyles div div form p input { margin: 4px 0; }
         }
         @media (min-width: 800px) {
-            #profilStyles #personneProfil {
+            #commonStyles #personneProfil {
                 background: url('bg-blue.png'), #4b4e6d;
                 box-shadow: inset -4px -4px 4px #373a59;
             }
-            #profilStyles .projetProfil {
+            #commonStyles .projetProfil {
                 background: url('bg-dark.png'), #d1c5c5;
                 box-shadow: inset -4px -4px 4px #c1b2b2;
             }

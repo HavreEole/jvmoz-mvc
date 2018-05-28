@@ -4,14 +4,12 @@
             
         try {
             
-            // modèles :
             include_once("/modeles/m_list.php");
-
-            // vues :
             include_once("/vues/v_list.php");
 
-
-        } catch (exception $e) { die('Erreur: Accès refusé.'); }
+        } catch (exception $e) {
+            die("<section><header>Erreur - Accès refusé</header></section>");
+        }
             
     }
 

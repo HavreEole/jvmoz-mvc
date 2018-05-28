@@ -9,7 +9,7 @@
     /* Récupérer une liste de tags, triés par nb d'affichages. */
 
     $requete = $pdo->prepare('SELECT nom,nbUsages FROM mz_tags ORDER BY nbUsages DESC LIMIT :affichageLength');
-        $requete->execute(array('affichageLength' => $listes->get_menuLength()));
+        $requete->execute(array('affichageLength' => $stockDatas->get_menuLength()));
         $resultat = $requete->fetchAll(PDO::FETCH_ASSOC);
         $requete->closeCursor(); $requete=NULL;
         
@@ -35,9 +35,9 @@
 
     /* si des tags sont dans l'url, ils devront forcément apparaitre dans la liste */
 
-    if (!empty($listes->get_tagsFromUrlArray())) {
+    if (!empty($stockDatas->get_tagsFromUrlArray())) {
         
-            $tagsFromUrl = $listes->get_tagsFromUrlArray();
+            $tagsFromUrl = $stockDatas->get_tagsFromUrlArray();
             $tagExistAlready = array(); $tagsToAdd = array();
 
             // retirer ceux déjà dans la liste des tags à ajouter,
@@ -71,7 +71,7 @@
 
     }
 
-    $listes->set_tagsListeAffichee($tags);
+    $stockDatas->set_tagsListeAffichee($tags);
 
     $pdo = NULL;
 

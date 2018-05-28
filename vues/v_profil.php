@@ -1,9 +1,9 @@
-<?php   // Si la personne n'existe pas ou est bannie, on affichera la personne n°0.
-        $theProfil = $listes->get_onePersonneInfo( $listes->get_profilPersonneNum() )->get_profil();
+<?php   
+        $theProfil = $stockDatas->get_onePersonneInfo( $stockDatas->get_profilPersonneNum() )->get_profil();
 ?>
 
 <main>
-    <section id='profilStyles'>
+    <section id='commonStyles'>
         
         
         <!-- Retour -->
@@ -28,7 +28,7 @@
             <div class="wrapper">
 
                 <div class="col-3-1">
-                    <img src="<?php echo('vues/'.$theProfil['urlAvatar']); ?>">
+                    <img src="<?php echo('vues/'.$theProfil['urlAvatar']); ?>" alt="Avatar de <?php echo($theProfil['identite']); ?>">
                 </div>
 
                 <div class="col-3-1">
@@ -62,9 +62,9 @@
 
         <!-- Projets -->
 
-        <?php foreach ( $listes->get_profilProjetsNum() as $aProjetNum ) { 
+        <?php foreach ( $stockDatas->get_profilProjetsNum() as $aProjetNum ) { 
 
-                $theProject = $listes->get_infosProjets($aProjetNum)->get_projet();
+                $theProject = $stockDatas->get_infosProjets($aProjetNum)->get_projet();
         ?>
 
         <article class="projetProfil">
@@ -114,7 +114,7 @@
                 </div>
 
                 <div class="col-3-1">
-                    <img src="<?php echo('vues/'.$theProject['urlVisuel']); ?>">
+                    <img src="<?php echo('vues/'.$theProject['urlVisuel']); ?>" alt="Visuel du projet <?php echo($theProject['nom']); ?>">
                 </div>
             </div>
         </article>

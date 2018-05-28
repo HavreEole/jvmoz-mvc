@@ -4,14 +4,16 @@
             
         try {
             
-            // modèles :
             include_once("/modeles/m_menu.php");
-
-            // vues :
             include_once("/vues/v_menu.php");
 
-
-        } catch (exception $e) { die('Erreur: Accès refusé.'); }
+        } catch (exception $e) {
+            $erreurTxt = "Erreur - Accès refusé";
+            include_once("/vues/v_erreur.php");
+            include_once("/controleurs/c_footer.php");
+            unset($erreurTxt);
+            die();
+        }
             
     }
 

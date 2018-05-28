@@ -3,7 +3,7 @@
                 
                 <?php
                     $listAdminsTxt = '';
-                    foreach ($listes->get_adminsFooterInfos() as $oneAdmin) {
+                    foreach ($stockDatas->get_adminsFooterInfos() as $oneAdmin) {
 
                         $listAdminsTxt .= '<a href="profil.php?num='.$oneAdmin['numero'].'">'.$oneAdmin['identite'].'</a>, ';
 

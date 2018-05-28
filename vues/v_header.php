@@ -11,5 +11,5 @@
 
         <header>
             <a href="index.php">JV Mosaic</a>
-            <a href="#">Se connecter</a>
+            <a href="compte.php">Se connecter</a>
         </header>

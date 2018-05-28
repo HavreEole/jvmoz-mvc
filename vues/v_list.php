@@ -5,29 +5,29 @@
                 <div id="personnesListe">
 
                     <h1>
-                        <span><?php echo $listes->get_titreHtml(); ?></span>
+                        <span><?php echo $stockDatas->get_titreHtml(); ?></span>
                     </h1>
 
-                    <?php foreach ( $listes->get_infosPersonnes() as $oneNumber=>$onePersonne ) { ?>
+                    <?php foreach ( $stockDatas->get_infosPersonnes() as $oneNumber=>$onePersonne ) { ?>
                     <?php $theInfos = $onePersonne->get_listInfos(); ?>
                         <article>
                             <a href="profil.php?num=<?php echo $oneNumber ?>">
                                 <div>
-                                    <img src="vues/<?php echo $theInfos['urlAvatar'] ?>">
+                                    <img src="vues/<?php echo $theInfos['urlAvatar'] ?>" alt="Avatar de <?php echo $theInfos['identite'] ?>">
                                     <span><?php echo $theInfos['identite'] ?></span>
                                 </div>
                             </a>
                         </article>
                     <?php } ?>
 
-                    <?php if ($listes->get_voirPlus()) { ?>
+                    <?php if ($stockDatas->get_voirPlus()) { ?>
                         <p>
                             <a href="">Voir plus</a>
                         </p>
                     <?php } ?>
 
                 </div>
-            </section> 
+            </section>
         </div>
     </div>
 </main>

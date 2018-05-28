@@ -8,74 +8,74 @@
 
     /*** Vérification de présence de num dans l'url ***/
 
-    if ($recuperation->testNotEmptyGetFromUrl("num")) { // s'il y a des num dans l'url,
+    if (Recuperation::testNotEmptyGetFromUrl("num")) { // s'il y a des num dans l'url,
 
         
         /*** récupérer le num dans l'url, ***/
-        // compter le nombre total de personnes (bannies inclues)
-        $requete = $pdo->query('SELECT COUNT(numero) FROM mz_personne');
+        $safePersonneNum = Recuperation::getGetFromUrl("num");
+        $requete = $pdo->prepare('SELECT ban FROM mz_personne WHERE numero = :numero');
+        $requete->execute(array('numero' => $safePersonneNum));
         $resultat = $requete->fetchColumn();
-        $safePersonneNum = $recuperation->getGetFromUrl("num",$resultat);
-        $listes->set_profilPersonneNum($safePersonneNum);
+        if ( $resultat === 0 ) { // La personne existe et n'est pas bannie.
+            $stockDatas->set_profilPersonneNum($safePersonneNum);
+        }
         $requete->closeCursor(); $requete=NULL; unset($resultat);
 
         
-        /*** récupérer le profil de la personne ***/
-        $requete = $pdo->prepare('SELECT numero,ban,prenom,pseudo,nom,twitter,linkedin,website,description,urlAvatar FROM mz_personne WHERE numero = :numero');
-        $requete->execute(array('numero' => $safePersonneNum));
-        $resultat = $requete->fetch(PDO::FETCH_ASSOC);
-        if ( $resultat['ban'] == 0 ) { $listes->add_PersonneInfos($resultat); }
-        $requete->closeCursor(); $requete=NULL; unset($resultat);
-        
-        
         
         // Si la personne existe et n'est pas bannie,
-        if ( $listes->get_profilPersonneNum() != -1 ) {
+        if ( $stockDatas->get_profilPersonneNum() != -1 ) {
+        
             
-            
-            
+            /*** récupérer le profil de la personne ***/
+            $requete = $pdo->prepare('SELECT numero,prenom,pseudo,nom,twitter,linkedin,website,description,urlAvatar FROM mz_personne WHERE numero = :numero');
+            $requete->execute(array('numero' => $safePersonneNum));
+            $resultat = $requete->fetch(PDO::FETCH_ASSOC);
+            $stockDatas->add_PersonneInfos($resultat);
+            $requete->closeCursor(); $requete=NULL; unset($resultat);
+
+
             /*** récupérer les tags de la personne ***/
             $requete = $pdo->prepare('  SELECT nom FROM mz_tags t
                                     INNER JOIN mz_depeindre d ON t.numero = d.numero_TAGS
                                     WHERE d.numero_PERSONNE = :numero');
             $requete->execute(array('numero' => $safePersonneNum));
             $resultat = $requete->fetchAll(PDO::FETCH_COLUMN);
-            $listes->add_PersonneInfos(array('numero'=>$safePersonneNum,'tagList'=>$resultat));
+            $stockDatas->add_PersonneInfos(array('numero'=>$safePersonneNum,'tagList'=>$resultat));
             $requete->closeCursor(); $requete=NULL; unset($resultat);
-            
-            
-            
+
+
             /*** récupérer les projets de la personne ***/
-            
+
             // récupérer les numeros de projets d'une personne
             $requete = $pdo->prepare('SELECT numero_PROJET FROM mz_travailler WHERE numero_PERSONNE = :numero');
             $requete->execute(array('numero' => $safePersonneNum));
             $resultat = $requete->fetchAll(PDO::FETCH_COLUMN);
-            $listes->set_profilProjetsNum($resultat);
+            $stockDatas->set_profilProjetsNum($resultat);
             $requete->closeCursor(); $requete=NULL; unset($resultat);
 
-            
-            // récupérer les infos de chaque projet
-            foreach( $listes->get_profilProjetsNum() as $aProjectNum ) {
 
-                
+            // récupérer les infos de chaque projet
+            foreach( $stockDatas->get_profilProjetsNum() as $aProjectNum ) {
+
+
                 $requete = $pdo->prepare('SELECT numero,nom,studio,description,dateSortie,website,urlVisuel FROM mz_projet WHERE numero = :numero');
                 $requete->execute(array('numero' => $aProjectNum));
                 $resultat = $requete->fetch(PDO::FETCH_ASSOC);
-                $listes->add_ProjetInfos($resultat);
+                $stockDatas->add_ProjetInfos($resultat);
                 $requete->closeCursor(); $requete=NULL; unset($resultat);
-                
-                
+
+
                 // récupérer les tags qui décrivent le projet
                 $requete = $pdo->prepare('  SELECT nom FROM mz_tags t
                                             INNER JOIN mz_decrire d ON t.numero = d.numero_TAGS
                                             WHERE d.numero_PROJET = :numero');
                 $requete->execute(array('numero' => $aProjectNum));
                 $resultat = $requete->fetchAll(PDO::FETCH_COLUMN);
-                $listes->add_ProjetInfos(array('numero'=>$aProjectNum,'tagList'=>$resultat));
+                $stockDatas->add_ProjetInfos(array('numero'=>$aProjectNum,'tagList'=>$resultat));
                 $requete->closeCursor(); $requete=NULL; unset($resultat);
-                
-                
+
+
                 // liste des gens qui travaillent sur le même projet
                 $requete = $pdo->prepare('  SELECT p.numero,nom,prenom,pseudo FROM mz_personne p
                                             INNER JOIN mz_travailler t ON p.numero = t.numero_PERSONNE
@@ -84,13 +84,13 @@
                                             AND p.numero != :persNum');
                 $requete->execute(array('projNum' => $aProjectNum,'persNum' => $safePersonneNum));
                 $resultat = $requete->fetchAll(PDO::FETCH_ASSOC);
-                $listes->add_ProjetInfos(array('numero'=>$aProjectNum,'equipe'=>$resultat));
+                $stockDatas->add_ProjetInfos(array('numero'=>$aProjectNum,'equipe'=>$resultat));
                 $requete->closeCursor(); $requete=NULL; unset($resultat);
-                
+
             }
             
-        }
         
+        }
         
     }
 

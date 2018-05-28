@@ -9,8 +9,8 @@
     $resultat = $requete->fetchAll(PDO::FETCH_ASSOC);
     $requete->closeCursor();
     foreach($resultat as $oneAdmin) {
-        $listes->add_PersonneInfos($oneAdmin);
-        $listes->set_numerosAdmins($oneAdmin['numero']);
+        $stockDatas->add_PersonneInfos($oneAdmin);
+        $stockDatas->set_numerosAdmins($oneAdmin['numero']);
     }
     $requete=NULL; unset($resultat);
     $pdo = NULL;

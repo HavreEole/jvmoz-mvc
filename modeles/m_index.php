@@ -43,9 +43,9 @@
 
     /*** Vérification de présence de tags dans l'url ***/
 
-    if ($recuperation->testNotEmptyGetFromUrl("tag")) { // s'il y a des tags dans l'url,
+    if (Recuperation::testNotEmptyGetFromUrl("tag")) { // s'il y a des tags dans l'url,
 
-        $safeTag = $recuperation->getGetFromUrl("tag"); // récupérer les tags dans l'url,
+        $safeTag = Recuperation::getGetFromUrl("tag"); // récupérer les tags dans l'url,
         $multiTags = explode(",",$safeTag); // en faire un array.
         $tagListArray = array();
         $tagListTxt = '';
@@ -75,7 +75,7 @@
         $tagListTxt = preg_replace('/[-]/', ' ', $tagListTxt);
         $tagListTxt = rtrim($tagListTxt,', ');
         
-        $listes->set_tagsFromUrl($tagListTxt,$tagListArray);
+        $stockDatas->set_tagsFromUrl($tagListTxt,$tagListArray);
     }
 
 

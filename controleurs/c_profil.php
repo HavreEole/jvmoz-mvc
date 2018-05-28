@@ -4,17 +4,29 @@
             
         try {
             
-            // modèles :
             include_once("/modeles/m_profil.php");
             
-            // le header a besoin de l'identité récupérée dans le modèle.
-            include_once("controleurs/c_header.php");
-            
-            // vues :
-            include_once("/vues/v_profil.php");
+            if ( $stockDatas->get_profilPersonneNum() != -1 ) { // le profil existe.
+                
+                // ce header a besoin de l'identité récupérée dans le modèle.
+                $isProfil = true; include_once("controleurs/c_header.php"); unset($isProfil);
+                include_once("/vues/v_profil.php");
+                
+            } else {
+                
+                $erreurTxt = "Erreur - profil non disponible";
+                include_once("/vues/v_erreur.php");
+                unset($erreurTxt);
+                
+            }
 
-
-        } catch (exception $e) { die('Erreur: Accès refusé.'); }
+        } catch (exception $e) {
+            $erreurTxt = "Erreur - Accès refusé";
+            include_once("/vues/v_erreur.php");
+            include_once("/controleurs/c_footer.php");
+            unset($erreurTxt);
+            die();
+        }
             
     }
 

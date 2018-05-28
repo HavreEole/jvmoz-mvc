@@ -9,9 +9,9 @@
     /*** Selection du titre et des personnes à afficher ***/
         
     /* s'il y a un tag dans l'url, on va afficher les personnes qui y sont liées */
-    if ($listes->get_tagsFromUrlTxt() != '') {
+    if ($stockDatas->get_tagsFromUrlTxt() != '') {
 
-        $listes->set_titreHtml("Les résultats pour votre recherche : ".$listes->get_tagsFromUrlTxt());
+        $stockDatas->set_titreHtml("Les résultats pour votre recherche : ".$stockDatas->get_tagsFromUrlTxt());
 
         $resultatBrut = array();
         $resultat = array();
@@ -20,7 +20,7 @@
         
         /* liste des personnes pour chaque tag */
         
-        foreach ($listes->get_tagsFromUrlArray() as $oneTagName) {
+        foreach ($stockDatas->get_tagsFromUrlArray() as $oneTagName) {
             
             //faire correspondre l'url au tag
             $oneTagName = preg_replace('/[-]/', ' ', $oneTagName); // des espaces
@@ -42,7 +42,7 @@
                                         INNER JOIN mz_tags t ON d.numero_TAGS = t.numero
                                         WHERE t.nom = :nom
                                         LIMIT :affichageLength');
-            $requete->execute(array('nom' => $oneTagName, 'affichageLength' => $listes->get_indexLength()+1));
+            $requete->execute(array('nom' => $oneTagName, 'affichageLength' => $stockDatas->get_indexLength()+1));
             $resultat = $requete->fetchAll(PDO::FETCH_COLUMN);
             $requete->closeCursor(); $requete=NULL;
 
@@ -70,8 +70,8 @@
             $resultat = $resultatBrut[0];
         }
 
-        $listes->set_selectedPersonnesNumeros($resultat);
-        $listes->set_voirPlus(count($resultat));
+        $stockDatas->set_selectedPersonnesNumeros($resultat);
+        $stockDatas->set_voirPlus(count($resultat));
         
         unset($resultatBrut);
         unset($resultat);
@@ -81,7 +81,7 @@
     /* s'il y a pas de tag dans l'url, on va choisir aléatoirement des personnes à afficher */
     } else {
 
-        $listes->set_titreHtml("Quelques personnes de l'industrie du jeu vidéo");
+        $stockDatas->set_titreHtml("Quelques personnes de l'industrie du jeu vidéo");
 
         /*** compter le nombre total de personnes ***/
         $requete = $pdo->query('SELECT COUNT(ban) FROM mz_personne WHERE ban = 0');
@@ -93,19 +93,19 @@
         // choisir des personnes aléatoirement
         $maxRand = $nombrePersonnes-1; 
         $personnesNumList = array();
-        for ($i=0; $i<$listes->get_indexLength(); $i++) {
+        for ($i=0; $i<$stockDatas->get_indexLength(); $i++) {
             array_push($personnesNumList,mt_rand(0,$maxRand));
         }
         
-        $listes->set_selectedPersonnesNumeros(array_unique($personnesNumList));
-        $listes->set_voirPlus($nombrePersonnes);
+        $stockDatas->set_selectedPersonnesNumeros(array_unique($personnesNumList));
+        $stockDatas->set_voirPlus($nombrePersonnes);
 
     }
 
 
 
     /* On récupère le profil des personnes à afficher */
-    foreach ($listes->get_selectedPersonnesNumeros() as $onePersonnesNum) {
+    foreach ($stockDatas->get_selectedPersonnesNumeros() as $onePersonnesNum) {
         
         $requete = $pdo->prepare('SELECT numero,ban,prenom,pseudo,nom,urlAvatar FROM mz_personne WHERE numero = :numero');
         $requete->execute(array('numero' => $onePersonnesNum));
@@ -114,7 +114,7 @@
         
         if ( $resultat['ban'] == 0 ) { // On affiche pas les personnes bannies.
             
-            $listes->add_PersonneInfos($resultat);
+            $stockDatas->add_PersonneInfos($resultat);
             
         }
         
