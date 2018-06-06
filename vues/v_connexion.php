@@ -1,6 +1,8 @@
             <main>
             <section id='commonStyles'>
 
+                
+                
                 <!-- Retour -->
 
                 <menu>
@@ -9,10 +11,27 @@
                     </a>
                 </menu>
 
+                
+                
                 <!-- Titre -->
 
-                <h1><span>Connexion ou inscription</span></h1>
+                <h1><span>Créer ou modifier un profil</span></h1>
                 
+                
+                
+                <!-- Message d'erreur -->
+                
+                <?php if (isset($erreurTxt)) { ?>
+                    <article class="connexion">
+                        <div class="wrapper">
+                            <p>
+                                <?php echo $erreurTxt; ?>
+                            </p>
+                        </div>
+                    </article>
+                <?php } ?>
+                
+                        
                 
                 <!-- Profil -->
 
@@ -20,55 +39,43 @@
                     <div class="wrapper">
 
                         <div class="col-2-1">
-                            <h2>Se connecter</h2>
+                            <h2>Connexion ou inscription</h2>
                             
                             <form action="compte.php" method="post">
                                 <p>
-                                    <label for="co_login">Email</label>
-                                    <input type="email" name="co_login" required="true"/>
+                                    <label for="email">Email</label>
+                                    <input type="email" name="email" required="true"/>
                                 </p>
                                 <p>
-                                    <label for="co_mdp">Mot de passe</label>
-                                    <input type="password" name="co_mdp" required="true"/>
+                                    <label for="mdp">Mot de passe</label>
+                                    <input type="password" name="mdp" required="true"/>
+                                </p>
+                                <p>
+                                    <label for="capcha">Capcha</label>
+                                    <input type="password" name="capcha" required="true"/>
                                 </p>
                                 <!--<input type="hidden" name="co_poivre"/>-->
                                 <p>
                                     <input type="submit" value="Se connecter"/>
+                                    <input type="submit" value="S'inscrire" name="sinscrire"/>
                                 </p>
                             </form>
                             
                         </div>
                         
                         <div class="col-2-1">
-                            <h2>S'inscrire</h2>
-                            
-                            <form action="compte.php" method="post">
-                                <p>
-                                    <label for="in_nom">Nom</label>
-                                    <input type="text" name="in_nom" required="true"/>
-                                </p>
-                                <p>
-                                    <label for="in_email">Email</label>
-                                    <input type="email" name="in_email" required="true"/>
-                                </p>
-                                <p>
-                                    <label for="in_mdp">Mot de passe</label>
-                                    <input type="password" name="in_mdp" required="true"/>
-                                </p>
-                                <p>
-                                    <label for="in_capcha">Capcha</label>
-                                    <input type="text" name="in_capcha" required="true"/>
-                                </p>
-                                <!--<input type="hidden" name="in_poivre"/>-->
-                                <p>
-                                    <input type="submit" value="S'inscrire"/>
-                                </p>
-                            </form>
-                            
+                            <h2>Pourquoi faire</h2>
+                            <p>S'inscrire permet de créer son propre profil afin de le faire figurer dans l'annuaire.</p>
+                            <p>Se connecter permet de modifier ses données, de les supprimer ou de se désinscrire.</p>
+                            <h2>Informations</h2>
+                            <p><span>Email</span> Il est utilisé pour authentifier votre connexion, et ne sera pas transmis à des tiers.</p>
+                            <p><span>Mot de passe</span> Merci d'utiliser des chiffres, des lettres avec et sans majuscules et des caractères spéciaux, par ex une courte phrase.</p>
                         </div>
 
                     </div>
                 </article>
+                        
+                        
 
             </section>
         </main>

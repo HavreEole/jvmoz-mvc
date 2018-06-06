@@ -7,12 +7,8 @@
     // Footer : trouver tous les admins du site.
     $requete = $pdo->query('SELECT numero,prenom,pseudo,nom FROM mz_personne WHERE admin=1');
     $resultat = $requete->fetchAll(PDO::FETCH_ASSOC);
-    $requete->closeCursor();
-    foreach($resultat as $oneAdmin) {
-        $stockDatas->add_PersonneInfos($oneAdmin);
-        $stockDatas->set_numerosAdmins($oneAdmin['numero']);
-    }
-    $requete=NULL; unset($resultat);
+    $footerInfos = $resultat;
+    $requete->closeCursor(); $requete=NULL; unset($resultat);
     $pdo = NULL;
 
 ?>

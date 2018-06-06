@@ -53,13 +53,6 @@
             
         }
         
-        public function get_footerInfos() {
-            
-            return array(   'numero'=>$this->numero,
-                            'identite'=>$this->identite    );
-            
-        }
-        
         public function get_Identite() { return $this->identite; }
         
     }

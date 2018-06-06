@@ -30,7 +30,7 @@ body {
     body>header {
         position: fixed;
         width: 100%;
-        height: 40px;
+        height: 42px;
         background-color: #28afb0;
         border-bottom: 5px solid #48d0d1;
         z-index: 100;
@@ -102,30 +102,24 @@ body {
 
         /* HEADER */
 
-        body>header a:first-of-type {
+        body>header { text-align: right; }
+        body>header a:hover { color: white; }
+
+        body>header>* {
+            float: clear;
+            display: inline-block;
+            margin: 9px 2px;
+            color: #e0f8f8;
+            background-color: #28afb0; /* IE */
+        }
+
+        body>header>a:first-child {
             float: left;
-            margin: -1px 2% 0;
+            margin: -2px 2% 0;
             font-family: titleFont, arial, sans-serif;
             font-size: 2rem;
             text-decoration: none;
             text-shadow: 2px 1px 0px #368181;
-        }
-
-        body>header a:last-of-type {
-            float: right;
-            margin: 6px 2%;
-        }
-
-        body>header a {
-            color: #e0f8f8;
-        }
-
-        body>header a:hover {
-            color: white;
-        }
-
-        body>header a:last-child { /* IE */
-            background-color: #28afb0;
         }
 
 
@@ -230,17 +224,17 @@ body {
                     text-decoration: none;
                 }
 
-                    menu a h3 {
+                    menu a h3, menu a h4 {
                         background-color: #19647e;
                         color: #c5e1e2;
                     }
 
-                    menu a h3:hover {
+                    menu a h3:hover, menu a h4:hover {
                         background-color: #36768d;
                         color: #dcfdf6;
                     }
 
-                menu h3 {
+                menu h3, menu h4 {
                     margin: 0 0 20px;
                     padding: 1px 3%;
                     background-color: #727393;
@@ -254,8 +248,16 @@ body {
                     font-size: 1.5rem;
                 }
 
+                menu a h4 {
+                    margin: 0;
+                    padding: 0 3% 2px;
+                    border-top-color: #218c9a;
+                    font-size: 1.3rem;
+                    font-variant: normal;
+                }
+
                 @media (max-width: 800px) {
-                    menu h3 {
+                    menu h3, menu h4 {
                         margin-bottom: 10px;
                         text-align: left; /* IE */
                         font-size: 1.5rem;
@@ -537,7 +539,7 @@ body {
                     border: 0 solid white;
                     border-width: 0 1px 1px 1px;
                 }
-                .connexion div div:last-child {
+                .connexion div div:last-child:not(:only-child) {
                     background-color: #57597b;
                     border: 0 solid #4b4e6d;
                     border-width: 0 5px;
@@ -551,33 +553,53 @@ body {
                     }
 
 
-                    .projetProfil div div:first-child p:first-child {
-                        font-variant: small-caps;
-                    }
-
-
                         /* les textes */
 
-                        .connexion div div h2 {
-                            background-color: rgba(255,255,255,0.5);
+                        .projetProfil div div:first-child p:first-child {
                             font-variant: small-caps;
-                            font-weight: normal;
                         }
-
-                        .connexion div div h2 { color: #218c9a; }
-                        .connexion div div:last-child h2 {
-                            background-color: rgba(255,255,255,0.1);
-                            color: #d0d1ea;
+                        .projetProfil div div p {
+                            background-color: #baa4a4;
+                            color: #2e2323;
                         }
 
                         #personneProfil div div p {
                             background-color: #57597b;
                             color: #d0d1ea;
                         }
-                        .projetProfil div div p {
-                            background-color: #baa4a4;
-                            color: #2e2323;
+
+
+                        .connexion div div h2 {
+                            background-color: #eee5e5;
+                            font-variant: small-caps;
+                            font-weight: normal;
+                            color: #218c9a;
                         }
+                        .connexion div div:last-child:not(:only-child) h2 {
+                            background-color: #8286a8;
+                            color: #d0d1ea;
+                        }
+                        .connexion div div:last-child:not(:only-child) p {
+                            background-color: #4b4e6d;
+                            color: #d0d1ea;
+                        }
+                        .connexion div div:last-child:not(:only-child) form p {
+                            background-color: initial;
+                        }
+                        .connexion textarea {
+                            display: block;
+                            width: 100%;
+                        }
+                        .connexion .notaBene {
+                            font-size: 0.9rem;
+                            font-style: italic;
+                            color: #145858;
+                        }
+                        .connexion .notaBene em {
+                            font-size: 1rem;
+                            font-style: normal;
+                        }
+
 
                             #commonStyles article div div p span,
                             #commonStyles div div form p label {
@@ -589,7 +611,13 @@ body {
                             }
 
                             #commonStyles article div div p span {
-                                margin: 0 10px 0 -10px;
+                                display: inline-block;
+                                margin: 2px;
+                            }
+
+                            #commonStyles #personneProfil div div p:not(.tagList) span,
+                            #commonStyles .projetProfil div div p:not(.tagList) span {
+                                margin: 0 2px 0 -9px;
                             }
 
 
@@ -609,7 +637,7 @@ body {
 
                         #commonStyles p.tagList span {
                             display: inline-block;
-                            margin: 2px 4px 2px 0;
+                            margin: 2px;
                             border-radius: 2px;
                             background-color: #218c9a;
                             color: #c5e1e2;
@@ -618,17 +646,64 @@ body {
 
                         /* les formulaires */
 
-                        #commonStyles div div form { padding: 0 10px 20px; }
+                        #commonStyles .soloBox {
+                            width: 83%;
+                            border-bottom-width: 0;
+                        }
 
-                            #commonStyles div div form p {
-                                margin: 5px auto;
-                                text-align: center;
+                            #commonStyles div div form { padding: 0 10px 20px; }
+
+                            #commonStyles .demiForm {
+                                display: inline-block;
+                                width: 49%;
+                                margin: 0;
+                                vertical-align: top;
                             }
 
-                                #commonStyles div div form p * {
-                                    display: inline-block;
-                                    width:48%;
+                                #commonStyles div div form p {
+                                    margin: 5px auto;
+                                    text-align: center;
                                 }
+
+                                    #commonStyles div div form p * {
+                                        display: inline-block;
+                                        width:48%;
+                                    }
+
+                                    #commonStyles div div form p input.checkbox { width: 20px; }
+                                    #commonStyles div div form p .checkbox ~ * { width: 89%; }
+
+                                #commonStyles .tagListForm {
+                                    column-width: 180px;
+                                    column-gap: 20px;
+                                }
+
+                                    #commonStyles .tagListForm span {
+                                        width: 100%;
+                                        margin: 3px 0;
+                                        padding: 3px 2px 0 3px;
+                                        text-align: left;
+                                    }
+
+                                        #commonStyles .tagListForm span * {
+                                            display: inline;
+                                            vertical-align: top;
+                                        }
+
+                                        #commonStyles article div div .tagListForm span label {
+                                            display: inline-block;
+                                            width: 60%;
+                                        }
+
+                                        #commonStyles .tagListForm span .checkbox { width: 10px; }
+
+                                        #commonStyles .tagListForm span em {
+                                            padding: 1px 6px 0 5px;
+                                            border-radius: 20px;
+                                            background-color: #218c9a;
+                                            box-shadow: 1px 1px 1px #373a59;
+                                            color: #c5e1e2;
+                                        }
 
 
                         /* les images */
@@ -642,6 +717,20 @@ body {
                             border-radius: 2px;
                         }
 
+
+        @media (max-width: 600px) {
+            #commonStyles .demiForm {
+                width: 80%;
+                margin: 0;
+                padding: 0;
+            }
+            #commonStyles .demiForm:last-child {
+                margin-bottom: 20px;
+            }
+            #commonStyles div div form p .checkbox ~ * {
+                width: 85%;
+            }
+        }
 
         @media (max-width: 800px) {
             #commonStyles { padding: 40px 0 20px 0; }
@@ -662,6 +751,7 @@ body {
             #commonStyles div div form p * { width: 100%; }
             #commonStyles div div form p input { margin: 4px 0; }
         }
+
         @media (min-width: 800px) {
             #commonStyles #personneProfil {
                 background: url('bg-blue.png'), #4b4e6d;

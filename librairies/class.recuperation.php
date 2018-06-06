@@ -6,7 +6,7 @@
         public function _construct() {}
 
         
-        /* vérifie uniquement que ce n'est pas vide. */
+        /* (URL) vérifie uniquement que ce n'est pas vide. */
         public static function testNotEmptyGetFromUrl ($aThing) {
 
             if (isset($_GET[$aThing])) { // éviter des erreurs avec certains hébergeurs.
@@ -37,7 +37,7 @@
 
             } else if ($aThing == "tag") {
 
-                // Any single character except : the range a-z or A-Z or 0-9 or ,
+                // Any single character except : the range a-z or A-Z or 0-9 or , -
                 $safeGetThing = preg_replace('/[^a-zA-Z0-9,-]/', '', $safeGetThing);
 
             }
@@ -48,7 +48,7 @@
 
 
         
-        /* vérifie uniquement que ce n'est pas vide. */
+        /* (INPUT) vérifie uniquement que ce n'est pas vide. */
         public static function testNotEmptyPostFromInput ($aThing) {
 
             if (isset($_POST[$aThing])) { // éviter des erreurs avec certains hébergeurs.
@@ -68,8 +68,28 @@
         
         
         /* (INPUT) retourne un résultat secure depuis les POST. */
-        public static function getPostFromInput () {
+        public static function getPostFromInput ($aThing,$aMode) {
 
+            $safeGetThing = $_POST[$aThing];
+            
+            /*** TODO ***/
+            
+            switch ($aMode) {
+                    
+                case 'identite' : return $safeGetThing; break;
+                case 'email' : return $safeGetThing; break;
+                case 'mdp' : return $safeGetThing; break;
+                case 'link' : return $safeGetThing; break;
+                case 'img' : return $safeGetThing; break;
+                case 'desc' : return $safeGetThing; break;
+                case 'tag' : return $safeGetThing; break;
+                case 'date' : return $safeGetThing; break;
+                case 'coworker' : return $safeGetThing; break;
+                default: return $safeGetThing; break;
+                    
+            }
+            
+            
             // -> htmlspecialchars pour qqchose qui va être affiché en html
             // -> + sanitization lib, mais en attendant je vais juste retirer les trucs louches.
             // <>~%'{([-|_\^)]=}+$*!:;.?é`çà@$£/§#& ,

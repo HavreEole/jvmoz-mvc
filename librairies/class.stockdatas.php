@@ -19,7 +19,6 @@
         
         /* Utilisé dans les deux */
         private $infosPersonnes = array();
-        private $numerosAdmins = array();
         
         
         
@@ -96,24 +95,6 @@
 
         public function get_infosPersonnes() { return $this->infosPersonnes; }
         public function get_onePersonneInfo($aNumber) { return $this->infosPersonnes[$aNumber]; }
-        
-        public function set_numerosAdmins($anNumber) {
-                array_push($this->numerosAdmins,$anNumber);
-        }
-        
-        public function get_adminsFooterInfos() {
-
-            $listAdminsInfos = array();
-            
-            foreach ($this->numerosAdmins as $oneAdminNumero) {
-                
-                $oneAdminInfos = $this->infosPersonnes[$oneAdminNumero]->get_footerInfos();
-                array_push($listAdminsInfos,$oneAdminInfos);
-                
-            }
-     
-            return $listAdminsInfos;
-        }
         
         
         

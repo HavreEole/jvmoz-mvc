@@ -11,5 +11,12 @@
 
         <header>
             <a href="index.php">JV Mosaic</a>
-            <a href="compte.php">Se connecter</a>
+            <?php if ( isset($_SESSION['numLogged']) ) { ?>
+                <a href="profil.php?num=<?php echo $_SESSION['numLogged']; ?>"><?php echo $_SESSION['nomLogged']; ?></a>
+                <a href="compte.php">Modifier</a>
+                <a href="deco.php">Deconnexion</a>
+            
+            <?php } else { ?>
+                <a href="compte.php">Se connecter</a>
+            <?php } ?>
         </header>

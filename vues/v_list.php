@@ -13,7 +13,7 @@
                         <article>
                             <a href="profil.php?num=<?php echo $oneNumber ?>">
                                 <div>
-                                    <img src="vues/<?php echo $theInfos['urlAvatar'] ?>" alt="Avatar de <?php echo $theInfos['identite'] ?>">
+                                    <img src="<?php echo $theInfos['urlAvatar'] ?>" alt="Avatar de <?php echo $theInfos['identite'] ?>">
                                     <span><?php echo $theInfos['identite'] ?></span>
                                 </div>
                             </a>

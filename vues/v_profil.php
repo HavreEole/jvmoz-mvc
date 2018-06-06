@@ -28,7 +28,7 @@
             <div class="wrapper">
 
                 <div class="col-3-1">
-                    <img src="<?php echo('vues/'.$theProfil['urlAvatar']); ?>" alt="Avatar de <?php echo($theProfil['identite']); ?>">
+                    <img src="<?php echo($theProfil['urlAvatar']); ?>" alt="Avatar de <?php echo($theProfil['identite']); ?>">
                 </div>
 
                 <div class="col-3-1">
@@ -37,9 +37,9 @@
 
                 <div class="col-3-1">
                     <p class="tagList">
-                        <?php foreach( $theProfil['tagList'] as $aTag ) { ?>
-                            <span><?php echo($aTag); ?></span>
-                        <?php } ?>
+                        <?php foreach( $theProfil['tagList'] as $aTag ) {
+                            echo('<span>'.$aTag.'</span>');
+                        } ?>
                     </p>
                     <p>
                         <span>Twitter</span>
@@ -103,9 +103,9 @@
                    <?php } ?>
 
                     <p class="tagList">
-                        <?php foreach( $theProject['tagList'] as $aTag ) { ?>
-                            <span><?php echo($aTag); ?></span>
-                        <?php } ?>
+                        <?php foreach( $theProject['tagList'] as $aTag ) {
+                            echo('<span>'.$aTag.'</span>');
+                        } ?>
                     </p>
                 </div>
 
@@ -114,7 +114,7 @@
                 </div>
 
                 <div class="col-3-1">
-                    <img src="<?php echo('vues/'.$theProject['urlVisuel']); ?>" alt="Visuel du projet <?php echo($theProject['nom']); ?>">
+                    <img src="<?php echo($theProject['urlVisuel']); ?>" alt="Visuel du projet <?php echo($theProject['nom']); ?>">
                 </div>
             </div>
         </article>

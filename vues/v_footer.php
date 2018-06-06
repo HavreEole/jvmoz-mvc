@@ -3,9 +3,11 @@
                 
                 <?php
                     $listAdminsTxt = '';
-                    foreach ($stockDatas->get_adminsFooterInfos() as $oneAdmin) {
+                    foreach ($footerInfos as $oneAdmin) {
 
-                        $listAdminsTxt .= '<a href="profil.php?num='.$oneAdmin['numero'].'">'.$oneAdmin['identite'].'</a>, ';
+                        $identite = ($oneAdmin['pseudo'] != '') ? $oneAdmin['pseudo'] : $oneAdmin['prenom'].' '.$oneAdmin['nom'];
+                        
+                        $listAdminsTxt .= '<a href="profil.php?num='.$oneAdmin['numero'].'">'.$identite.'</a>, ';
 
                     }
                     $listAdminsTxt = rtrim($listAdminsTxt,', ');

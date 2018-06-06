@@ -1,6 +1,6 @@
 <?php
     
-    //session_start();
+    session_start();
 
     /* Erreurs */
     // Masquer les erreurs PHP : https://stackoverflow.com/a/32648423
