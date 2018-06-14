@@ -1,5 +1,5 @@
 <?php   
-        $theProfil = $stockDatas->get_onePersonneInfo( $stockDatas->get_profilPersonneNum() )->get_profil();
+        $theProfil = $profilDatas->get_onePersonneInfo( $profilDatas->get_profilPersonneNum() )->get_profil();
 ?>
 
 <main>
@@ -62,9 +62,12 @@
 
         <!-- Projets -->
 
-        <?php foreach ( $stockDatas->get_profilProjetsNum() as $aProjetNum ) { 
+        <?php foreach ( $profilDatas->get_profilProjetsNum() as $aProjetNum ) { 
 
-                $theProject = $stockDatas->get_infosProjets($aProjetNum)->get_projet();
+            $theProject = $profilDatas->get_infosProjets($aProjetNum)->get_projet();
+            
+            if ($theProject['nom'] != '' && $theProject['studio'] != '') {
+    
         ?>
 
         <article class="projetProfil">
@@ -110,16 +113,21 @@
                 </div>
 
                 <div class="col-3-1">
-                    <p><?php echo($theProject['description']); ?></p>
+                    <?php if ($theProject['description'] != '') { ?>
+                        <p><?php echo($theProject['description']); ?></p>
+                    <?php } ?>
                 </div>
 
                 <div class="col-3-1">
-                    <img src="<?php echo($theProject['urlVisuel']); ?>" alt="Visuel du projet <?php echo($theProject['nom']); ?>">
+                    <?php if ($theProject['urlVisuel'] != '') { ?>
+                        <img src="<?php echo($theProject['urlVisuel']); ?>" alt="Visuel du projet <?php echo($theProject['nom']); ?>">
+                    <?php } ?>
                 </div>
             </div>
         </article>
 
-        <?php } ?>
+        <?php } 
+            } ?>
 
         
         

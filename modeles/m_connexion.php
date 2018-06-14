@@ -42,7 +42,7 @@
 
         $numCompte = $resultat['numero'];
         $identiteCompte = ($resultat['pseudo'] != '') ? $resultat['pseudo'] : $resultat['prenom']." ".$resultat['nom'];
-        // isAdmin ... TODO
+        $isAdmin = ($resultat['admin'] == '1') ? true : false;
         
 
     /* Si la personne existe, mdp ok, mais bannie. */

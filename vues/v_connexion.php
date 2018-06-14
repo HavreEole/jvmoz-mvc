@@ -22,7 +22,7 @@
                 <!-- Message d'erreur -->
                 
                 <?php if (isset($erreurTxt)) { ?>
-                    <article class="connexion">
+                    <article class="formStyle">
                         <div class="wrapper">
                             <p>
                                 <?php echo $erreurTxt; ?>
@@ -35,7 +35,7 @@
                 
                 <!-- Profil -->
 
-                <article class="connexion">
+                <article class="formStyle">
                     <div class="wrapper">
 
                         <div class="col-2-1">

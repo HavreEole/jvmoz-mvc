@@ -2,7 +2,7 @@
     <div id="menuListStyles">
         <menu class="col-5-1">
     
-            <?php if (empty($stockDatas->get_tagsFromUrlTxt())) { ?>
+            <?php if (empty($indexDatas->get_tagsFromUrlTxt())) { ?>
                 <h3>Ajouter des filtres</h3>
             <?php } else { ?>
                 <a href='index.php'><h3>Retirer les filtres</h3></a>
@@ -12,14 +12,14 @@
 
             <?php
                 
-                foreach ($stockDatas->get_tagsListeAffichee() as $aTagInfos) {
+                foreach ($indexDatas->get_tagsListeAffichee() as $aTagInfos) {
 
                     // préparer un event au clic sur le lien :
                     $tagOnclick = 'addTag(event,\''.$aTagInfos['nomPourUrl'].'\')';
 
                     // Si le tag est selectionné :
                     $tagClass= '';
-                    if (in_array($aTagInfos['nomPourUrl'],$stockDatas->get_tagsFromUrlArray())) {
+                    if (in_array($aTagInfos['nomPourUrl'],$indexDatas->get_tagsFromUrlArray())) {
                         $tagOnclick = 'removeTag(event,\''.$aTagInfos['nomPourUrl'].'\')'; // on change l'event.
                         $tagClass= " class='tagSelect' "; // on ajoute une classe.
                     } ?>

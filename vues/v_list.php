@@ -5,10 +5,10 @@
                 <div id="personnesListe">
 
                     <h1>
-                        <span><?php echo $stockDatas->get_titreHtml(); ?></span>
+                        <span><?php echo $indexDatas->get_titreHtml(); ?></span>
                     </h1>
 
-                    <?php foreach ( $stockDatas->get_infosPersonnes() as $oneNumber=>$onePersonne ) { ?>
+                    <?php foreach ( $indexDatas->get_infosPersonnes() as $oneNumber=>$onePersonne ) { ?>
                     <?php $theInfos = $onePersonne->get_listInfos(); ?>
                         <article>
                             <a href="profil.php?num=<?php echo $oneNumber ?>">
@@ -20,7 +20,7 @@
                         </article>
                     <?php } ?>
 
-                    <?php if ($stockDatas->get_voirPlus()) { ?>
+                    <?php if ($indexDatas->get_voirPlus()) { ?>
                         <p>
                             <a href="">Voir plus</a>
                         </p>

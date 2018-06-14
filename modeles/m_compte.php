@@ -25,25 +25,14 @@
 
 
     /*** récupérer les projets de la personne ***/
-
-    // récupérer les numeros de projets d'une personne
-    $requete = $pdo->prepare('SELECT numero_PROJET FROM mz_travailler WHERE numero_PERSONNE = :numero');
+    $requete = $pdo->prepare('SELECT p.nom FROM mz_projet p
+                            INNER JOIN mz_travailler t ON t.numero_PROJET = p.numero
+                            WHERE t.numero_PERSONNE = :numero ORDER BY p.numero DESC');
     $requete->execute(array('numero' => $safePersonneNum));
     $resultat = $requete->fetchAll(PDO::FETCH_COLUMN);
-    $compteDatas->set_projetsListNum($resultat);
+    $compteDatas->set_projetsListNom($resultat);
     $requete->closeCursor(); $requete=NULL; unset($resultat);
 
-
-    // récupérer les noms de chaque projet
-    foreach( $compteDatas->get_projetsListNum() as $aProjectNum ) {
-
-        $requete = $pdo->prepare('SELECT nom FROM mz_projet WHERE numero = :numero');
-        $requete->execute(array('numero' => $aProjectNum));
-        $resultat = $requete->fetch(PDO::FETCH_ASSOC);
-        $compteDatas->add_projetsListNom($aProjectNum,$resultat);
-        $requete->closeCursor(); $requete=NULL; unset($resultat);
-
-    }
 
     $pdo = NULL; // fin de connexion.
 

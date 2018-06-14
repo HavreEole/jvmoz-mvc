@@ -30,7 +30,7 @@ body {
     body>header {
         position: fixed;
         width: 100%;
-        height: 42px;
+        min-height: 42px;
         background-color: #28afb0;
         border-bottom: 5px solid #48d0d1;
         z-index: 100;
@@ -39,19 +39,16 @@ body {
     main {
         display: block; /* IE */
         background-color: #eee5e5;
+        box-shadow: 0 4px 10px #1a1b26;
+        border-bottom: 4px solid #8286a8;
     }
 
     footer {
-        min-height: 40px;
-        background-color: #19647e;
-        border-top: 5px solid #218c9a;
-        border-bottom: 1px solid #1a799a;
-        box-shadow: 0 2px 1px #323448;
+        margin: 5px 0;
+        text-align: center;
     }
 
-        h1 {
-            margin: 40px 0 28px;
-        }
+        h1 { margin: 40px 0 28px; }
 
             h1 span {
                 margin-left: 3%;
@@ -102,25 +99,29 @@ body {
 
         /* HEADER */
 
-        body>header { text-align: right; }
+        body>header {
+            text-align: right;
+            padding: 8px 3% 0 5px;
+        }
         body>header a:hover { color: white; }
 
         body>header>* {
             float: clear;
             display: inline-block;
-            margin: 9px 2px;
+            margin: auto 2px;
             color: #e0f8f8;
-            background-color: #28afb0; /* IE */
         }
 
         body>header>a:first-child {
             float: left;
-            margin: -2px 2% 0;
+            margin: -10px 2% 0;
             font-family: titleFont, arial, sans-serif;
             font-size: 2rem;
             text-decoration: none;
             text-shadow: 2px 1px 0px #368181;
         }
+
+        body>header>a:last-child { margin-bottom: 6px; }
 
 
 
@@ -129,14 +130,16 @@ body {
         footer span {
             display:inline-block;
             margin: 10px 2%;
-            font-size: 0.8rem;
-            color: #8cd7e5;
+            font-size: 1rem;
+            color:  #d0d1ea;
             font-variant: small-caps;
+            font-family: titleFont, arial, sans-serif;
         }
 
         footer span a {
-            color: #8cd7e5;
+            color:  #d0d1ea;
             text-decoration: none;
+            font-variant: normal;
         }
 
         footer span a:hover {
@@ -364,7 +367,7 @@ body {
         #personnesListe {
             display: inline-block;
             width: 100%;
-            padding-top: 10px;
+            padding: 10px 0 15px;
             text-align: left;
             column-width: 170px;
             column-gap: 30px;
@@ -514,6 +517,21 @@ body {
                 border-width: 1px 0;
             }
 
+            #commonStyles article.subArticle {
+                margin-top: 0;
+                margin-bottom: 60px;
+                background-color: #4b4e6d;
+                border-top: 2px solid #6a5353;
+                border-bottom: 4px solid #8286a8;
+            }
+
+            #commonStyles article.supArticle {
+                margin-top: 60px;
+                margin-bottom: 0;
+                border: 0 solid #f8f0f0;
+                border-width: 3px 0 2px 0;
+            }
+
             #commonStyles #personneProfil {
                 background-color: #4b4e6d;
             }
@@ -532,18 +550,24 @@ body {
                     min-width: 250px;
                 }
 
-                .connexion div div { margin: 0 1%; }
+                #commonStyles .supArticle div div { border-width: 0; }
+                #commonStyles .formStyle div div { margin: 0 1%; }
 
-                .connexion div div:first-child {
+                .formStyle div div:first-child,
+                .subarticle div div,
+                .formStyle div div.notBlue {
                     background-color: #d9d0d0;
                     border: 0 solid white;
                     border-width: 0 1px 1px 1px;
                 }
-                .connexion div div:last-child:not(:only-child) {
+                .formStyle div div:last-child:not(:only-child):not(.notBlue),
+                .subArticle div.wrapper div {
                     background-color: #57597b;
                     border: 0 solid #4b4e6d;
                     border-width: 0 5px;
                 }
+
+                #commonStyles article:not(.subArticle) .adminList { background-color: #d9d0d0; }
 
                     #commonStyles article div div p {
                         margin: 15px;
@@ -553,7 +577,20 @@ body {
                     }
 
 
+
                         /* les textes */
+
+                        #commonStyles article div p span.hoverMdp {
+                            padding: 0 15px;
+                            background-color: #57597b;
+                            color: #d0d1ea;
+                        }
+                        #commonStyles article div p span.hoverMdp span {
+                            color: #57597b;
+                        }
+                        #commonStyles article div p span.hoverMdp:hover span {
+                            color: #d0d1ea;
+                        }
 
                         .projetProfil div div:first-child p:first-child {
                             font-variant: small-caps;
@@ -568,34 +605,40 @@ body {
                             color: #d0d1ea;
                         }
 
-
-                        .connexion div div h2 {
+                        .formStyle div div h2 {
                             background-color: #eee5e5;
                             font-variant: small-caps;
                             font-weight: normal;
                             color: #218c9a;
                         }
-                        .connexion div div:last-child:not(:only-child) h2 {
+                        .formStyle div div:last-child:not(:only-child):not(.notBlue) h2,
+                        .subArticle div div h2 {
                             background-color: #8286a8;
                             color: #d0d1ea;
                         }
-                        .connexion div div:last-child:not(:only-child) p {
+                        .formStyle div div:last-child:not(:only-child):not(.notBlue) p,
+                        .subArticle div div p {
                             background-color: #4b4e6d;
                             color: #d0d1ea;
                         }
-                        .connexion div div:last-child:not(:only-child) form p {
+
+                        .formStyle div div:last-child:not(:only-child):not(.notBlue) form p,
+                        .subArticle div div form p {
                             background-color: initial;
                         }
-                        .connexion textarea {
+
+                        .formStyle textarea {
                             display: block;
                             width: 100%;
                         }
-                        .connexion .notaBene {
+                        .formStyle .notaBene {
                             font-size: 0.9rem;
                             font-style: italic;
+                        }
+                        .formStyle:not(.subArticle) .notaBene {
                             color: #145858;
                         }
-                        .connexion .notaBene em {
+                        .formStyle .notaBene em {
                             font-size: 1rem;
                             font-style: normal;
                         }
@@ -673,6 +716,9 @@ body {
                                     #commonStyles div div form p input.checkbox { width: 20px; }
                                     #commonStyles div div form p .checkbox ~ * { width: 89%; }
 
+
+                                /* .tagListForm */
+
                                 #commonStyles .tagListForm {
                                     column-width: 180px;
                                     column-gap: 20px;
@@ -700,10 +746,70 @@ body {
                                         #commonStyles .tagListForm span em {
                                             padding: 1px 6px 0 5px;
                                             border-radius: 20px;
-                                            background-color: #218c9a;
                                             box-shadow: 1px 1px 1px #373a59;
+                                        }
+                                        #commonStyles .tagListForm span em:not(.adminEm):not(.banEm) {
+                                            background-color: #218c9a;
                                             color: #c5e1e2;
                                         }
+
+
+                                /* .adminList .tagListForm */
+
+                                #commonStyles .adminList .tagListForm {
+                                    width: 100%;
+                                    padding: 20px 3% 0;
+                                    margin: 0 0 15px;
+                                    background-color: rgba(255,255,255,0.1);
+                                    border: none;
+                                    text-align: left;
+                                }
+
+                                #commonStyles .adminList h4 {
+                                    text-align: center;
+                                    margin-top: 0;
+                                    background-color: rgba(255,255,255,0.2);
+                                    font-variant: small-caps;
+                                }
+
+                                #commonStyles .supArticle .adminList h4 { color: #19647e; }
+                                #commonStyles .subArticle .adminList h4 { color: white; }
+
+                                    #commonStyles .adminList .tagListForm form,
+                                    #commonStyles .adminList .tagListForm form a {
+                                        display: inline-block;
+                                        width: 100%;
+                                    }
+
+                                            #commonStyles .adminList .tagListForm form span {
+                                                border-radius: 2px;
+                                                padding-bottom: 2px;
+                                            }
+
+                                                #commonStyles .adminList .tagListForm form span em {
+                                                    margin-right: 8px;
+                                                }
+
+                                                .adminList em.adminEm {
+                                                    background-color: white;
+                                                    color: #218c9a;
+                                                    font-style: normal;
+                                                    font-size: 0.85rem;
+                                                }
+                                                .adminList em.banEm {
+                                                    background-color: orange;
+                                                    color: #4d2222;
+                                                    font-style: normal;
+                                                    font-size: 0.85rem;
+                                                }
+
+                                                .adminList input.adminEm,
+                                                .adminList input.banEm {
+                                                    text-decoration: line-through;
+                                                    color: #218c9a;
+                                                }
+
+                                                .adminList input:not(.adminEm):not(.banEm):hover { color: red; }
 
 
                         /* les images */

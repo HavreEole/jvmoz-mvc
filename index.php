@@ -11,15 +11,14 @@
 
     /* Classes */
     include_once("/librairies/class.recuperation.php");
-    include_once("/librairies/class.stockdatas.php");
+    include_once("/librairies/class.indexdatas.php");
     include_once("/librairies/class.personne.php");
 
-    $stockDatas = new stockdatas();
-    //if ( isset($_SESSION['listes']) ) { $stockDatas->loadInfosSession($_SESSION['listes']); }
+    $indexDatas = new indexDatas();
 
     /* modèle du super-controleur */
     // requête vérifiant la concordance des tags présents dans l'url avec ceux de la BDD.
-    // le résultat est stocké dans $stockDatas et utilisé dans plusieurs modèles ensuite.
+    // le résultat est stocké dans $indexDatas et utilisé dans plusieurs modèles ensuite.
     include_once("modeles/m_index.php");
 
     /* controleurs */
@@ -28,8 +27,6 @@
     include_once("controleurs/c_list.php");
     include_once("controleurs/c_footer.php");
 
-    //$_SESSION['listes'] = $stockDatas->saveInfosSession();
-
 ?>
 
-<script type="text/javascript" src="vues/v_menu_script.js"></script>
+<script type="text/javascript" src="vues/scripts/menu.js"></script>

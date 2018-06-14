@@ -13,19 +13,12 @@
         $requete->closeCursor(); $requete=NULL; unset($resultat);
 
         /*** récupérer les tags de la personne ***/
-        $requete = $pdo->prepare('  SELECT t.numero,t.nom FROM mz_tags t
+        $requete = $pdo->prepare('  SELECT t.nom FROM mz_tags t
                                 INNER JOIN mz_depeindre d ON t.numero = d.numero_TAGS
                                 WHERE d.numero_PERSONNE = :numero_p');
         $requete->execute(array('numero_p' => $numero));
-        $resultat = $requete->fetchAll(PDO::FETCH_ASSOC);
-        $resultat_tagsListNum = array();
-        $resultat_tagsListNom = array();
-        foreach ($resultat as $aTag) {
-            array_push($resultat_tagsListNum,$aTag['numero']);
-            array_push($resultat_tagsListNom,$aTag['nom']);
-        }
-        $compteDatas->set_tagsListNum($resultat_tagsListNum);
-        $compteDatas->set_tagsListNom($resultat_tagsListNom);
+        $resultat = $requete->fetchAll(PDO::FETCH_COLUMN);
+        $compteDatas->set_tagsListNom($resultat);
         $requete->closeCursor(); $requete=NULL; unset($resultat);
 
         $pdo = NULL; // fin de connexion.

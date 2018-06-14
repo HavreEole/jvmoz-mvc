@@ -10,6 +10,5 @@
     DEFINE ('SERVEUR', 'mysql:host=localhost;dbname=mosaic;port=3306;charset=utf8');
     DEFINE ('USER', 'root'); // utilisateur
     DEFINE ('PASS', ''); // password
-    // DEFINE ('PERSONNE', 'mz_personne'); // nom de table
 
 ?>

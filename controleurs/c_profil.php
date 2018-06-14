@@ -6,7 +6,7 @@
             
             include_once("/modeles/m_profil.php");
             
-            if ( $stockDatas->get_profilPersonneNum() != -1 ) { // le profil existe.
+            if ( $profilDatas->get_profilPersonneNum() != -1 ) { // le profil existe.
                 
                 // ce header a besoin de l'identité récupérée dans le modèle.
                 $isProfil = true; include_once("controleurs/c_header.php"); unset($isProfil);

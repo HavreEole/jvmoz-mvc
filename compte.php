@@ -16,6 +16,4 @@
     include_once("controleurs/c_compte.php");
     include_once("controleurs/c_footer.php");
 
-    //$_SESSION['listes'] = $stockDatas->saveInfosSession();
-
 ?>

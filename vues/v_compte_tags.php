@@ -25,7 +25,7 @@
                 <!-- Message d'erreur -->
                 
                 <?php if (isset($erreurTxt)) { ?>
-                    <article class="connexion">
+                    <article class="formStyle">
                         <div class="wrapper">
                             <p>
                                 <?php echo $erreurTxt; ?>
@@ -38,7 +38,7 @@
                 
                 <!-- supprimer -->
                 <?php if (count($compteDatas->get_tagsListNom()) > 0) { ?>
-                    <article class="connexion">
+                    <article class="formStyle">
                         <div class="wrapper">
 
                             <div class="soloBox">
@@ -70,7 +70,7 @@
                 <?php if (count($compteDatas->get_tagsListNom()) < 11) { ?>
                 
                     <!-- Ajouter -->
-                    <article class="connexion">
+                    <article class="formStyle">
                         <div class="wrapper">
 
                             <div class="soloBox">
@@ -103,7 +103,7 @@
 
                     <!-- créer -->
 
-                    <article class="connexion">
+                    <article class="formStyle">
                         <div class="wrapper">
 
                             <div class="soloBox">

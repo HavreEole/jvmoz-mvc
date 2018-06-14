@@ -22,7 +22,7 @@
                 <!-- Message d'erreur -->
                 
                 <?php if (isset($erreurTxt)) { ?>
-                    <article class="connexion">
+                    <article class="formStyle">
                         <div class="wrapper">
                             <p>
                                 <?php echo $erreurTxt; ?>
@@ -35,7 +35,7 @@
                 
                 <!-- Afficher le profil -->
 
-                <article class="connexion">
+                <article class="formStyle">
                     <div class="wrapper">
 
                         <div class="soloBox">
@@ -63,7 +63,7 @@
                 
                 <!-- Identité et connexion -->
 
-                <article class="connexion">
+                <article class="formStyle">
                     <div class="wrapper">
 
                         <div class="col-2-1">
@@ -133,7 +133,7 @@
                 
                 <!-- Liens, description et avatar -->
 
-                <article class="connexion">
+                <article class="formStyle">
                     <div class="wrapper">
 
                         <div class="col-2-1">
@@ -187,7 +187,7 @@
                 
                 <!-- Tags et projets -->
 
-                <article class="connexion">
+                <article class="formStyle">
                     <div class="wrapper">
 
                         <div class="col-2-1">

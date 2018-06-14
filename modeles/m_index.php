@@ -75,7 +75,7 @@
         $tagListTxt = preg_replace('/[-]/', ' ', $tagListTxt);
         $tagListTxt = rtrim($tagListTxt,', ');
         
-        $stockDatas->set_tagsFromUrl($tagListTxt,$tagListArray);
+        $indexDatas->set_tagsFromUrl($tagListTxt,$tagListArray);
     }
 
 

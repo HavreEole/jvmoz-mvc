@@ -13,7 +13,7 @@
             if ( isset($_SESSION['numLogged']) ) {
                 
                 $safePersonneNum = $_SESSION['numLogged']; // TODO vérifier safitude
-                if ($safePersonneNum != null) { // pas de problèmes avec la session.
+                if ($safePersonneNum != null || $safePersonneNum === 0) { // pas de problèmes avec la session.
                     
                     include_once("/librairies/class.projet.php");
                     include_once("/librairies/class.comptedatas.php");
@@ -22,7 +22,7 @@
                     
                     /* Si la personne veut gérer ses tags, */
                     if ( Recuperation::testNotEmptyPostFromInput('tags_gerer') ) {
-                        include_once("controleurs/c_compte_tags.php"); //TODO
+                        include_once("controleurs/c_compte_tags.php");
                         
                     /* Si la personne veut gérer ses projets, */
                     } else if ( Recuperation::testNotEmptyPostFromInput('projets_gerer') ) {
@@ -82,6 +82,7 @@
                     $erreurTxt = '';
                     $numCompte;
                     $identiteCompte;
+                    $isAdmin;
                     
                     if (    Recuperation::testNotEmptyPostFromInput('email')
                             && Recuperation::testNotEmptyPostFromInput('mdp')
@@ -104,6 +105,8 @@
                                 // si ok on enregistre l'info dans la session,
                                 $_SESSION['numLogged'] = $numCompte;
                                 $_SESSION['nomLogged'] = $identiteCompte;
+                                if ($isAdmin) { $_SESSION['isAdmin'] = 'OtarieRose'; }
+                                
                                 // puis on redirect pour obtenir un menu à jour.
                                 header("location:compte.php");
                                 

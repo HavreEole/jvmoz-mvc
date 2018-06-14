@@ -17,21 +17,21 @@
         $requete->execute(array('numero' => $safePersonneNum));
         $resultat = $requete->fetchColumn();
         if ( $resultat === 0 ) { // La personne existe et n'est pas bannie.
-            $stockDatas->set_profilPersonneNum($safePersonneNum);
+            $profilDatas->set_profilPersonneNum($safePersonneNum);
         }
         $requete->closeCursor(); $requete=NULL; unset($resultat);
 
         
         
         // Si la personne existe et n'est pas bannie,
-        if ( $stockDatas->get_profilPersonneNum() != -1 ) {
+        if ( $profilDatas->get_profilPersonneNum() != -1 ) {
         
             
             /*** récupérer le profil de la personne ***/
             $requete = $pdo->prepare('SELECT numero,prenom,pseudo,nom,twitter,linkedin,website,description,urlAvatar FROM mz_personne WHERE numero = :numero');
             $requete->execute(array('numero' => $safePersonneNum));
             $resultat = $requete->fetch(PDO::FETCH_ASSOC);
-            $stockDatas->add_PersonneInfos($resultat);
+            $profilDatas->add_PersonneInfos($resultat);
             $requete->closeCursor(); $requete=NULL; unset($resultat);
 
 
@@ -41,28 +41,28 @@
                                     WHERE d.numero_PERSONNE = :numero');
             $requete->execute(array('numero' => $safePersonneNum));
             $resultat = $requete->fetchAll(PDO::FETCH_COLUMN);
-            $stockDatas->add_PersonneInfos(array('numero'=>$safePersonneNum,'tagList'=>$resultat));
+            $profilDatas->add_PersonneInfos(array('numero'=>$safePersonneNum,'tagList'=>$resultat));
             $requete->closeCursor(); $requete=NULL; unset($resultat);
 
 
             /*** récupérer les projets de la personne ***/
 
             // récupérer les numeros de projets d'une personne
-            $requete = $pdo->prepare('SELECT numero_PROJET FROM mz_travailler WHERE numero_PERSONNE = :numero');
+            $requete = $pdo->prepare('SELECT numero_PROJET FROM mz_travailler WHERE numero_PERSONNE = :numero ORDER BY numero_PROJET DESC');
             $requete->execute(array('numero' => $safePersonneNum));
             $resultat = $requete->fetchAll(PDO::FETCH_COLUMN);
-            $stockDatas->set_profilProjetsNum($resultat);
+            $profilDatas->set_profilProjetsNum($resultat);
             $requete->closeCursor(); $requete=NULL; unset($resultat);
 
 
             // récupérer les infos de chaque projet
-            foreach( $stockDatas->get_profilProjetsNum() as $aProjectNum ) {
+            foreach( $profilDatas->get_profilProjetsNum() as $aProjectNum ) {
 
 
                 $requete = $pdo->prepare('SELECT numero,nom,studio,description,dateSortie,website,urlVisuel FROM mz_projet WHERE numero = :numero');
                 $requete->execute(array('numero' => $aProjectNum));
                 $resultat = $requete->fetch(PDO::FETCH_ASSOC);
-                $stockDatas->add_ProjetInfos($resultat);
+                $profilDatas->add_ProjetInfos($resultat);
                 $requete->closeCursor(); $requete=NULL; unset($resultat);
 
 
@@ -72,7 +72,7 @@
                                             WHERE d.numero_PROJET = :numero');
                 $requete->execute(array('numero' => $aProjectNum));
                 $resultat = $requete->fetchAll(PDO::FETCH_COLUMN);
-                $stockDatas->add_ProjetInfos(array('numero'=>$aProjectNum,'tagList'=>$resultat));
+                $profilDatas->add_ProjetInfos(array('numero'=>$aProjectNum,'tagList'=>$resultat));
                 $requete->closeCursor(); $requete=NULL; unset($resultat);
 
 
@@ -84,7 +84,7 @@
                                             AND p.numero != :persNum');
                 $requete->execute(array('projNum' => $aProjectNum,'persNum' => $safePersonneNum));
                 $resultat = $requete->fetchAll(PDO::FETCH_ASSOC);
-                $stockDatas->add_ProjetInfos(array('numero'=>$aProjectNum,'equipe'=>$resultat));
+                $profilDatas->add_ProjetInfos(array('numero'=>$aProjectNum,'equipe'=>$resultat));
                 $requete->closeCursor(); $requete=NULL; unset($resultat);
 
             }

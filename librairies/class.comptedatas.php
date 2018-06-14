@@ -16,14 +16,13 @@
         private $description;
         private $urlAvatar;
         private $tagsListNom;
-        private $tagsListNum;
         private $allTags;
         private $projetsListNom;
-        private $projetsListNum;
-        private $projets;
+        private $allProjets;
         
         public function __construct() {
             $this->projetsListNom = array();
+            $this->allProjets = array();
         }
         
         public function set_infos($anArray) {
@@ -44,18 +43,15 @@
             
         }
         
-        public function set_projetsListNum($anArray) { $this->projetsListNum = $anArray; }
-        public function add_projetsListNom($aString) { array_push($this->projetsListNom,$aString); }
-        
+        public function set_projetsListNom($anArray) { $this->projetsListNom = $anArray; }
         public function set_tagsListNom($anArray) { $this->tagsListNom = $anArray; }
-        public function set_tagsListNum($anArray) { $this->tagsListNum = $anArray; }
         public function set_allTags($anArray) { $this->allTags = $anArray; }
         
         public function add_ProjetInfos($aNum,$anArray) {
-            if (!array_key_exists($aNum,$this->projets)) {
-                $this->projets[$aNum] = new unProjet();
+            if (!array_key_exists($aNum,$this->allProjets)) {
+                $this->allProjets[$aNum] = new unProjet();
             }
-            $this->projets[$aNum]->set_infos($anArray);
+            $this->allProjets[$aNum]->set_infos($anArray);
         }
         
         public function get_numero() { return $this->numero; }
@@ -72,10 +68,8 @@
         public function get_description() { return $this->description; }
         public function get_urlAvatar() { return $this->urlAvatar; }
         public function get_tagsListNom() { return $this->tagsListNom; }
-        public function get_tagsListNum() { return $this->tagsListNum; }
         public function get_allTags() { return $this->allTags; }
         public function get_projetsListNom() { return $this->projetsListNom; }
-        public function get_projetsListNum() { return $this->projetsListNum; }
-        public function get_projets() { return $this->projets; }
+        public function get_allProjets() { return $this->allProjets; }
         
     }

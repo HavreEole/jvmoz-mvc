@@ -4,7 +4,7 @@
     $description;
    
     if (isset($isProfil)) {
-        $identite = $stockDatas->get_onePersonneInfo( $stockDatas->get_profilPersonneNum() )->get_Identite();
+        $identite = $profilDatas->get_onePersonneInfo( $profilDatas->get_profilPersonneNum() )->get_Identite();
         
         $description = 'Consultez le profil et les projets de '.$identite.', une personne évoluant dans l\'industrie du jeu vidéo.';
         $titre = 'Profil de '.$identite;
