@@ -10,6 +10,7 @@
         $requete = $pdo->prepare('UPDATE mz_personne SET ban=:ban');
         $requete->execute(array('ban' => $aNum));
         $requete->closeCursor(); $requete=NULL; $pdo = NULL; // fin de connexion.
+        
     }
 
 

@@ -9,14 +9,13 @@
             
             
             /* Récupérer l'offset de la liste. */
-            if ( isset($_POST['list_voir_plus']) ) {
-                $indexSessionDatas['listOffset'][0] += 8;
-                unset($_POST['list_voir_plus']);
-
-            } else if ( isset($_POST['list_raz']) ) {
-                $indexSessionDatas['listOffset'][0] = 8;
+            if (    $oldSearch != $indexSessionDatas['indexSearch']
+                    || isset($_POST['list_raz'])    ) {
+                $indexSessionDatas['listOffset'] = array(8,0);
                 $indexSessionDatas['list'] = array();
-                unset($_POST['list_raz']);
+                
+            } else if ( isset($_POST['list_voir_plus']) ) {
+                $indexSessionDatas['listOffset'][0] += 8;
 
             }
             $listLength = $indexSessionDatas['listOffset'][0];
@@ -31,44 +30,51 @@
                 $resultatBrut = array();
                 $resultat = array();
 
+                if ( count($indexSessionDatas['list']) == 0 ) {
 
+                    /* liste des personnes pour chaque tag */
 
-                /* liste des personnes pour chaque tag */
+                    foreach ($indexDatas->get_tagsFromUrlArray() as $oneTagName) {
 
-                foreach ($indexDatas->get_tagsFromUrlArray() as $oneTagName) {
+                        //faire correspondre l'url au tag
+                        $oneTagName = preg_replace('/[-]/', ' ', $oneTagName); // des espaces
+                        $oneTagName = ucwords($oneTagName); // maj devant chaque mot
 
-                    //faire correspondre l'url au tag
-                    $oneTagName = preg_replace('/[-]/', ' ', $oneTagName); // des espaces
-                    $oneTagName = ucwords($oneTagName); // maj devant chaque mot
+                        $listPersonnesParTag = getListPersonnesParTag($oneTagName,$listLength);
 
-                    $listPersonnesParTag = getListPersonnesParTag($oneTagName,$listLength);
-                    
-                    array_push($resultatBrut,$listPersonnesParTag);
-                }
-
-
-
-                /* si plusieurs tags, on fait l'intersection */
-
-                if (count($resultatBrut)>1) {
-
-                    $intersectionResultats = array();
-
-                    for ($i=0; $i<count($resultatBrut)-1; $i++) {
-                        if ($i == 0) { $intersectionResultats = $resultatBrut[$i]; }
-                        $intersectionResultats = array_intersect($intersectionResultats,$resultatBrut[$i+1]);
+                        array_push($resultatBrut,$listPersonnesParTag);
                     }
 
-                    $resultat = $intersectionResultats;
 
 
-                } else { // sinon on renvoie juste la liste :
+                    /* si plusieurs tags, on fait l'intersection */
 
-                    $resultat = $resultatBrut[0];
+                    if (count($resultatBrut)>1) {
+
+                        $intersectionResultats = array();
+
+                        for ($i=0; $i<count($resultatBrut)-1; $i++) {
+                            if ($i == 0) { $intersectionResultats = $resultatBrut[$i]; }
+                            $intersectionResultats = array_intersect($intersectionResultats,$resultatBrut[$i+1]);
+                        }
+
+                        $resultat = $intersectionResultats;
+
+
+                    } else { // sinon on renvoie juste la liste :
+
+                        $resultat = $resultatBrut[0];
+                    }
+
+                    $indexSessionDatas['list'] = $resultat;
+                    $indexSessionDatas['listOffset'][1] = count($resultat);
+                
                 }
-
-                $indexDatas->set_selectedPersonnesNumeros($resultat);
-                $indexSessionDatas['listOffset'][1] = count($resultat)+1;
+                
+                $personnesNumList = array_slice(    $indexSessionDatas['list'],
+                                                    0, $indexSessionDatas['listOffset'][0]  );
+                
+                $indexDatas->set_selectedPersonnesNumeros($personnesNumList);
 
                 unset($resultatBrut);
                 unset($resultat);
@@ -85,10 +91,9 @@
                     
                     $allNumPersonnes = getNumPersonnesNonBan();
                     shuffle($allNumPersonnes);
-                    $indexSessionDatas['list'] = $allNumPersonnes;
                     
-                    $allNbPersonnes = count($allNumPersonnes);
-                    $indexSessionDatas['listOffset'][1] = $allNbPersonnes;
+                    $indexSessionDatas['list'] = $allNumPersonnes;
+                    $indexSessionDatas['listOffset'][1] = count($allNumPersonnes);
                     
                 }
                 
@@ -112,7 +117,7 @@
                     $indexDatas->add_PersonneInfos($resultat);
                     
                 } else {
-                    //$indexSessionDatas['listOffset'][0] -= 1;
+                    $indexSessionDatas['listOffset'][1] -= 1;
                 }
 
                 unset($resultat);
@@ -129,6 +134,7 @@
             
         } catch (exception $e) {
             die("<section><header>Erreur - Accès refusé</header></section>");
+            //die($e->getMessage());
         }
             
     }

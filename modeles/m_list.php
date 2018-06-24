@@ -2,7 +2,7 @@
 
 
 
-    function getListPersonnesParTag($oneTagName,$affichageLength) {
+    function getListPersonnesParTag($oneTagName) {
         
         $pdo = new PDO(SERVEUR, USER, PASS);
         $pdo->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
@@ -22,10 +22,9 @@
                                                 INNER JOIN mz_travailler tr ON d2.numero_PROJET = tr.numero_PROJET
                                         ) as d
                                     INNER JOIN mz_tag t ON d.numero_TAG = t.numero
-                                    WHERE t.nom = :nom
-                                    LIMIT :affichageLength');
+                                    WHERE t.nom = :nom  ');
         
-        $requete->execute(array('nom' => $oneTagName, 'affichageLength' => $affichageLength));
+        $requete->execute(array('nom' => $oneTagName));
         $resultat = $requete->fetchAll(PDO::FETCH_COLUMN);
         $requete->closeCursor(); $requete=NULL; $pdo = NULL; // fin de connexion.
         

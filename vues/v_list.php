@@ -28,7 +28,7 @@
                             <form method="post">
                                 <input type="submit" value="Voir plus" name="list_voir_plus"/>
                             </form>
-                        <?php } else { ?>
+                        <?php } else if( $indexSessionDatas['listOffset'][1] > 8 ) { ?>
                             <form method="post">
                                 <input type="submit" value="Remise à zéro" name="list_raz"/>
                             </form>

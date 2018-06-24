@@ -91,6 +91,7 @@
             include_once("/controleurs/c_footer.php");
             unset($erreurTxt);
             die();
+            //die($e->getMessage());
         }
             
     }

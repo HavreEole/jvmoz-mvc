@@ -44,6 +44,7 @@
     /*** Vérification de présence de tags dans l'url ou dans la session ***/
 
     $safeTag = '';
+    $oldSearch = $indexSessionDatas['indexSearch'];
 
     if (Recuperation::testNotEmptyGetFromUrl("tag")) { // s'il y a des tags dans l'url,
         $safeTag = Recuperation::getGetFromUrl("tag"); // récupérer les tags dans l'url,

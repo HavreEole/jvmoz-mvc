@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le :  Dim 24 juin 2018 à 16:32
+-- Généré le :  Dim 24 juin 2018 à 19:15
 -- Version du serveur :  5.7.19
 -- Version de PHP :  5.6.31
 
@@ -79,7 +79,7 @@ CREATE TABLE IF NOT EXISTS `mz_depeindre` (
   PRIMARY KEY (`numero`),
   KEY `FK_DEPEINDRE_numero_PERSONNE` (`numero_PERSONNE`),
   KEY `FK_DEPEINDRE_numero_TAGS` (`numero_TAG`)
-) ENGINE=InnoDB AUTO_INCREMENT=123 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=128 DEFAULT CHARSET=utf8;
 
 --
 -- Déchargement des données de la table `mz_depeindre`
@@ -118,7 +118,6 @@ INSERT INTO `mz_depeindre` (`numero`, `numero_PERSONNE`, `numero_TAG`) VALUES
 (65, 20, 4),
 (66, 20, 30),
 (67, 20, 18),
-(68, 0, 18),
 (76, 24, 30),
 (77, 24, 14),
 (78, 24, 27),
@@ -165,7 +164,9 @@ INSERT INTO `mz_depeindre` (`numero`, `numero_PERSONNE`, `numero_TAG`) VALUES
 (119, 29, 21),
 (120, 30, 8),
 (121, 30, 29),
-(122, 30, 5);
+(122, 30, 5),
+(124, 0, 18),
+(125, 0, 17);
 
 -- --------------------------------------------------------
 
@@ -275,45 +276,44 @@ DROP TABLE IF EXISTS `mz_tag`;
 CREATE TABLE IF NOT EXISTS `mz_tag` (
   `numero` smallint(5) UNSIGNED NOT NULL AUTO_INCREMENT,
   `nom` tinytext,
-  `nbUsages` smallint(5) DEFAULT NULL,
   PRIMARY KEY (`numero`)
-) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=utf8;
 
 --
 -- Déchargement des données de la table `mz_tag`
 --
 
-INSERT INTO `mz_tag` (`numero`, `nom`, `nbUsages`) VALUES
-(0, 'Freelance', 3),
-(1, 'Journalisme', 3),
-(2, 'Narrative Design', 2),
-(3, 'Community Management', 2),
-(4, 'Unity', 9),
-(5, 'Management', 3),
-(6, 'Graphisme', 5),
-(7, 'Game Design', 2),
-(8, 'Web', 9),
-(9, 'Level Design', 2),
-(10, '3D', 5),
-(11, 'Game Jam', 9),
-(12, 'Lead', 4),
-(13, 'Level Building', 1),
-(14, 'Need Job', 5),
-(15, 'Illustration', 4),
-(16, 'Concept Art', 1),
-(17, 'Chroniques', 1),
-(18, 'Youtube', 7),
-(19, 'Streaming', 1),
-(20, 'Recherche', 2),
-(21, 'Enseignement', 2),
-(22, 'Musique', 4),
-(24, 'Sound Design', 1),
-(25, 'Animation', 6),
-(26, 'Expat', 2),
-(27, 'Tool Dev', 1),
-(28, '2D', 10),
-(29, 'Indie', 7),
-(30, 'Developpement', 12);
+INSERT INTO `mz_tag` (`numero`, `nom`) VALUES
+(0, 'Freelance'),
+(1, 'Journalisme'),
+(2, 'Narrative Design'),
+(3, 'Community Management'),
+(4, 'Unity'),
+(5, 'Management'),
+(6, 'Graphisme'),
+(7, 'Game Design'),
+(8, 'Web'),
+(9, 'Level Design'),
+(10, '3D'),
+(11, 'Game Jam'),
+(12, 'Lead'),
+(13, 'Level Building'),
+(14, 'Need Job'),
+(15, 'Illustration'),
+(16, 'Concept Art'),
+(17, 'Chroniques'),
+(18, 'Youtube'),
+(19, 'Streaming'),
+(20, 'Recherche'),
+(21, 'Enseignement'),
+(22, 'Musique'),
+(24, 'Sound Design'),
+(25, 'Animation'),
+(26, 'Expat'),
+(27, 'Tool Dev'),
+(28, '2D'),
+(29, 'Indie'),
+(30, 'Developpement');
 
 -- --------------------------------------------------------
 

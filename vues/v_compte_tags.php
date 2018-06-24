@@ -43,7 +43,7 @@
 
                             <div class="soloBox">
 
-                                <h2>Supprimer des tags</h2>
+                                <h2>Retirer des tags</h2>
 
                                 <form action="compte.php" method="post">
                                     <p class="tagListForm">
@@ -55,7 +55,7 @@
                                         <?php } ?>
                                     </p>
                                     <p>
-                                        <input type="submit" value="Supprimer"/>
+                                        <input type="submit" value="Retirer"/>
                                         <input type="hidden" name="tags_gerer" value="supr_tags"/>
                                     </p>
                                 </form>

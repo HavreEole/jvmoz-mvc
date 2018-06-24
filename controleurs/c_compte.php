@@ -135,12 +135,12 @@
             
             
 
-        } catch (exception $e) {/*
+        } catch (exception $e) {
             $erreurTxt = "Erreur - Accès refusé";
             include_once("/vues/v_erreur.php");
             include_once("/controleurs/c_footer.php");
-            unset($erreurTxt);*/
-            die($e->getMessage());
+            unset($erreurTxt);
+            // die($e->getMessage());
         }
             
     }

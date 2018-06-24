@@ -24,10 +24,17 @@
         $pdo->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
         $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-        /* Récupérer une liste de tags, triés par nb d'affichages. */
+        /* Récupérer une liste de tags, triés par nb d'affichages, avec ban = 0 */
 
-        $requete = $pdo->prepare('  SELECT nom,nbUsages FROM mz_tag
-                                    ORDER BY nbUsages DESC LIMIT :affichageLength');
+        $requete = $pdo->prepare('  SELECT DISTINCT t.nom,count(d.numero_TAG) as nbUsages FROM mz_tag t
+                                    INNER JOIN (
+                                        SELECT numero_PERSONNE,numero_TAG FROM mz_depeindre d1
+                                        UNION SELECT numero_PERSONNE,numero_TAG FROM mz_decrire d2
+                                        INNER JOIN mz_travailler tr ON d2.numero_PROJET = tr.numero_PROJET
+                                    ) as d ON d.numero_TAG = t.numero
+                                    INNER JOIN mz_personne p ON d.numero_PERSONNE = p.numero
+                                    WHERE p.ban = 0
+                                    GROUP BY t.nom ORDER BY nbUsages DESC LIMIT :affichageLength    ');
         $requete->execute(array('affichageLength' => $affichageLength));
         $resultat = $requete->fetchAll(PDO::FETCH_ASSOC);
         $requete->closeCursor(); $requete=NULL; $pdo = NULL;
@@ -44,9 +51,17 @@
         $pdo->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
         $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-        /* Récupérer une liste de tags, triés par nb d'affichages. */
+        /* Récupérer un tag, son nb d'affichages, avec ban = 0 */
 
-        $requete = $pdo->prepare('SELECT nom,nbUsages FROM mz_tag WHERE nom = :nom');
+        // $requete = $pdo->prepare('SELECT nom,nbUsages FROM mz_tag WHERE nom = :nom');
+        $requete = $pdo->prepare('SELECT DISTINCT t.nom,count(d.numero_TAG) as nbUsages FROM mz_tag t
+                                    INNER JOIN (
+                                        SELECT numero_PERSONNE,numero_TAG FROM mz_depeindre d1
+                                        UNION SELECT numero_PERSONNE,numero_TAG FROM mz_decrire d2
+                                        INNER JOIN mz_travailler tr ON d2.numero_PROJET = tr.numero_PROJET
+                                    ) as d ON d.numero_TAG = t.numero
+                                    INNER JOIN mz_personne p ON d.numero_PERSONNE = p.numero
+                                    WHERE p.ban = 0 AND t.nom = :nom');
         $requete->execute(array('nom' => $aName));
         $resultat = $requete->fetch(PDO::FETCH_ASSOC);
         $requete->closeCursor(); $requete=NULL; $pdo = NULL;
@@ -68,13 +83,26 @@
 
         // Usages par personnes ET projets :
         /*
-            SELECT DISTINCT nom,count(d.numero_TAG) as cttags FROM tags t
+            SELECT DISTINCT nom,count(d.numero_TAG) as nbUsages FROM mz_tag t
             INNER JOIN (
-                SELECT numero_PERSONNE,numero_TAG FROM depeindre
-                UNION SELECT numero_PERSONNE,numero_TAG FROM decrire d2
-                INNER JOIN travailler tr ON d2.numero_PROJET = tr.numero_PROJET
+                SELECT numero_PERSONNE,numero_TAG FROM mz_depeindre
+                UNION SELECT numero_PERSONNE,numero_TAG FROM mz_decrire d2
+                INNER JOIN mz_travailler tr ON d2.numero_PROJET = tr.numero_PROJET
             ) as d ON d.numero_TAG = t.numero
-            GROUP BY t.nom ORDER BY cttags DESC;
+            GROUP BY t.nom ORDER BY nbUsages DESC LIMIT :affichageLength
+        */
+
+        // Usages par personnes ET projets, ban = 0 :
+        /*
+            SELECT DISTINCT t.nom,count(d.numero_TAG) as nbUsages FROM mz_tag t
+            INNER JOIN (
+                SELECT numero_PERSONNE,numero_TAG FROM mz_depeindre d1
+                UNION SELECT numero_PERSONNE,numero_TAG FROM mz_decrire d2
+                INNER JOIN mz_travailler tr ON d2.numero_PROJET = tr.numero_PROJET
+            ) as d ON d.numero_TAG = t.numero
+            INNER JOIN mz_personne p ON d.numero_PERSONNE = p.numero
+            WHERE p.ban = 0
+            GROUP BY t.nom ORDER BY nbUsages DESC LIMIT :affichageLength
         */
 
     // Nota : les personnes bannies ou qui ne veulent pas être affichées sont toujours comptées.

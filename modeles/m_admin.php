@@ -23,14 +23,20 @@
         $requete->closeCursor(); $requete=NULL; unset($resultat);
         
 
-        /*** récupérer la liste des tags avec offset ***/
+        /*** récupérer la liste des tags avec offset, triés par nb d'affichages, avec ban = 0 ***/
         
         $mySearch = "%".$adminDatas['tagsSearch']."%";
         $myOffset = $adminDatas['tagsOffset'];
-        
-        $requete = $pdo->prepare("  SELECT numero,nom,nbUsages FROM mz_tag
-                                    WHERE nom LIKE :mySearch
-                                    ORDER BY numero DESC LIMIT 12 OFFSET :myOffset ");
+
+        $requete = $pdo->prepare("  SELECT DISTINCT t.numero,t.nom,count(d.numero_TAG) as nbUsages FROM mz_tag t
+                                    INNER JOIN (
+                                        SELECT numero_PERSONNE,numero_TAG FROM mz_depeindre d1
+                                        UNION SELECT numero_PERSONNE,numero_TAG FROM mz_decrire d2
+                                        INNER JOIN mz_travailler tr ON d2.numero_PROJET = tr.numero_PROJET
+                                    ) as d ON d.numero_TAG = t.numero
+                                    INNER JOIN mz_personne p ON d.numero_PERSONNE = p.numero
+                                    WHERE p.ban = 0 AND t.nom LIKE :mySearch
+                                    GROUP BY t.nom ORDER BY nbUsages DESC LIMIT 12 OFFSET :myOffset ");
         $requete->execute(array('mySearch'=>$mySearch,'myOffset'=>$myOffset));
         $resultat = $requete->fetchAll(PDO::FETCH_ASSOC);
         $adminDatas['tags'] = $resultat;

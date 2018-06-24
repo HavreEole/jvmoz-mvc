@@ -6,8 +6,17 @@
         $pdo->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
         $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-        /*** récupérer tous les tags ***/
-        $requete = $pdo->query('SELECT * FROM mz_tag ORDER BY nbUsages DESC, nom ASC');
+        /*** récupérer tous les tags, triés par nb d'affichages, avec ban = 0 ***/
+        // $requete = $pdo->query('SELECT * FROM mz_tag ORDER BY nbUsages DESC, nom ASC');
+        $requete = $pdo->query('  SELECT DISTINCT t.numero,t.nom,count(d.numero_TAG) as nbUsages FROM mz_tag t
+                                    INNER JOIN (
+                                        SELECT numero_PERSONNE,numero_TAG FROM mz_depeindre d1
+                                        UNION SELECT numero_PERSONNE,numero_TAG FROM mz_decrire d2
+                                        INNER JOIN mz_travailler tr ON d2.numero_PROJET = tr.numero_PROJET
+                                    ) as d ON d.numero_TAG = t.numero
+                                    INNER JOIN mz_personne p ON d.numero_PERSONNE = p.numero
+                                    WHERE p.ban = 0
+                                    GROUP BY t.nom ORDER BY nbUsages DESC    ');
         $resultat = $requete->fetchAll(PDO::FETCH_ASSOC);
         $compteDatas->set_allTags($resultat);
         $requete->closeCursor(); $requete=NULL; unset($resultat);
@@ -46,11 +55,6 @@
             $requete->execute(array('numero_p' => $numero,'numero_t' => $aTagNum));
             $requete->closeCursor(); $requete=NULL;
             
-            /*** ajouter 1 nbUsages au tag ***/
-            $requete = $pdo->prepare('  UPDATE mz_tag SET nbUsages=(nbUsages+1) WHERE numero=:numero_t');
-            $requete->execute(array('numero_t' => $aTagNum));
-            $requete->closeCursor(); $requete=NULL;
-            
         }
         
         unset($resultat); $pdo = NULL; // fin de connexion.
@@ -78,11 +82,6 @@
             $requete->execute(array('numero' => $resultat));
             $requete->closeCursor(); $requete=NULL;
             
-            /*** retirer 1 de nbUsages du tag ***/
-            $requete = $pdo->prepare('  UPDATE mz_tag SET nbUsages=(nbUsages-1) WHERE nom=:nom_t');
-            $requete->execute(array('nom_t' => $aTagNom));
-            $requete->closeCursor(); $requete=NULL;
-            
         }
         
         unset($resultat); $pdo = NULL; // fin de connexion.
@@ -106,7 +105,7 @@
         if ( $resultat === false ) {
             
             /*** si ok, ajouter le tag dans mz_tag ***/
-            $requete = $pdo->prepare('INSERT INTO mz_tag(nom,nbUsages) VALUES (:nom,1)');
+            $requete = $pdo->prepare('INSERT INTO mz_tag(nom) VALUES (:nom)');
             $requete->execute(array('nom' => $aTagNom));
             $requete->closeCursor(); $requete=NULL;
             
