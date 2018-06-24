@@ -41,11 +41,24 @@
 
 
 
-    /*** Vérification de présence de tags dans l'url ***/
+    /*** Vérification de présence de tags dans l'url ou dans la session ***/
+
+    $safeTag = '';
 
     if (Recuperation::testNotEmptyGetFromUrl("tag")) { // s'il y a des tags dans l'url,
-
         $safeTag = Recuperation::getGetFromUrl("tag"); // récupérer les tags dans l'url,
+        $indexSessionDatas['indexSearch'] = $safeTag;
+        
+    } else if ($indexSessionDatas['indexSearch'] != '') {
+        $indexSessionDatas['indexSearch'] = '';
+    }
+        
+    
+
+    /*** Vérification de l'existence de ces tags dans la BDD ***/
+
+    if ( $safeTag != '' ) {
+        
         $multiTags = explode(",",$safeTag); // en faire un array.
         $tagListArray = array();
         $tagListTxt = '';
@@ -59,7 +72,7 @@
                 $aName = preg_replace('/[-]/', ' ', $oneTag); // des espaces
                 $aName = ucwords($aName); // maj devant chaque mot
 
-                $requete = $pdo->prepare('SELECT nom FROM mz_tags WHERE nom = :nom');
+                $requete = $pdo->prepare('SELECT nom FROM mz_tag WHERE nom = :nom');
                 $requete->execute(array('nom' => $aName));
                 $resultat = $requete->fetchColumn();
                 $requete->closeCursor(); $requete=NULL;
@@ -76,6 +89,7 @@
         $tagListTxt = rtrim($tagListTxt,', ');
         
         $indexDatas->set_tagsFromUrl($tagListTxt,$tagListArray);
+        
     }
 
 

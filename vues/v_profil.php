@@ -41,18 +41,24 @@
                             echo('<span>'.$aTag.'</span>');
                         } ?>
                     </p>
-                    <p>
-                        <span>Twitter</span>
-                        <a href="https://twitter.com/<?php echo($theProfil['links']['twitter']); ?>"><?php echo($theProfil['links']['twitter']); ?></a>
-                    </p>
-                    <p>
-                        <span>Linkedin</span>
-                        <a href="https://www.linkedin.com/in/<?php echo($theProfil['links']['linkedin']); ?>"><?php echo($theProfil['links']['linkedin']); ?></a>
-                    </p>
-                    <p>
-                        <span>Site web</span>
-                        <a href="<?php echo($theProfil['links']['website']); ?>"><?php echo($theProfil['links']['website']); ?></a>
-                    </p>
+                    <?php if ($theProfil['links']['twitter'] != '') { ?>
+                        <p>
+                            <span>Twitter</span>
+                            @<a href="https://twitter.com/<?php echo($theProfil['links']['twitter']); ?>"><?php echo($theProfil['links']['twitter']); ?></a>
+                        </p>
+                    <?php } ?>
+                    <?php if ($theProfil['links']['linkedin'] != '') { ?>
+                        <p>
+                            <span>Linkedin</span>
+                            <a href="https://www.linkedin.com/in/<?php echo($theProfil['links']['linkedin']); ?>"><?php echo($theProfil['links']['linkedin']); ?></a>
+                        </p>
+                    <?php } ?>
+                    <?php if ($theProfil['links']['website'] != '') { ?>
+                        <p>
+                            <span>Site web</span>
+                            <a href="<?php echo($theProfil['links']['website']); ?>"><?php echo($theProfil['links']['website']); ?></a>
+                        </p>
+                    <?php } ?>
                 </div>
 
             </div>
@@ -81,14 +87,18 @@
                         <span>Studio</span>
                         <?php echo($theProject['studio']); ?>
                     </p>
-                    <p>
-                        <span>Site web</span>
-                        <a href="<?php echo($theProject['website']); ?>"><?php echo($theProject['website']); ?></a>
-                    </p>
-                    <p>
-                        <span>Date de sortie</span>
-                        <?php echo($theProject['dateSortie']); ?>
-                    </p>
+                    <?php if ($theProject['website'] != '') { ?>
+                        <p>
+                            <span>Site web</span>
+                            <a href="<?php echo($theProject['website']); ?>"><?php echo($theProject['website']); ?></a>
+                        </p>
+                    <?php } ?>
+                    <?php if ($theProject['dateSortie'] != '') { ?>
+                        <p>
+                            <span>Date de sortie</span>
+                            <?php echo($theProject['dateSortie']); ?>
+                        </p>
+                    <?php } ?>
 
                     <?php // Les membres de l'équipe du projet s'il y en a une :
                         if ( count($theProject['equipe'])>0 ) { ?>

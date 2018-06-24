@@ -15,8 +15,8 @@
 
 
     /*** récupérer les tags de la personne ***/
-    $requete = $pdo->prepare('  SELECT nom FROM mz_tags t
-                            INNER JOIN mz_depeindre d ON t.numero = d.numero_TAGS
+    $requete = $pdo->prepare('  SELECT nom FROM mz_tag t
+                            INNER JOIN mz_depeindre d ON t.numero = d.numero_TAG
                             WHERE d.numero_PERSONNE = :numero');
     $requete->execute(array('numero' => $safePersonneNum));
     $resultat = $requete->fetchAll(PDO::FETCH_COLUMN);

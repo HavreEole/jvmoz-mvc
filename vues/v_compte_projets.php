@@ -119,8 +119,8 @@
                                         <input type="text" name="modif_website" value="<?php echo($aProject['website']); ?>"/>
                                     </p>
                                     <p>
-                                        <label for="modif_dateSortie">Date de sortie*</label>
-                                        <input type="date" name="modif_dateSortie" value="<?php echo($aProject['dateSortie']); ?>" required/>
+                                        <label for="modif_dateSortie">Date de sortie</label>
+                                        <input type="date" name="modif_dateSortie" value="<?php echo($aProject['dateSortie']); ?>"/>
                                     </p>
                                     <p>
                                         <input type="submit" name="projet_<?php echo($aProject['numero']); ?>" value="Enregistrer"/>

@@ -158,19 +158,23 @@
                             <form action="compte.php" method="post">
                                 <p>
                                     <label for="mod_linkedin">Linkedin</label>
-                                    <input type="text" name="mod_linkedin"  value="<?php echo($compteDatas->get_linkedin()); ?>"/>
+                                    <input type="text" name="mod_linkedin" 
+                                           value="<?php echo($compteDatas->get_linkedin()); ?>"/>
                                 </p>
                                 <p>
                                     <label for="mod_twitter">Twitter</label>
-                                    <input type="text" name="mod_twitter" value="<?php echo($compteDatas->get_twitter()); ?>"/>
+                                    <input type="text" name="mod_twitter"
+                                           value="<?php echo($compteDatas->get_twitter()); ?>"/>
                                 </p>
                                 <p>
                                     <label for="mod_website">Site Web</label>
-                                    <input type="text" name="mod_website" value="<?php echo($compteDatas->get_website()); ?>"/>
+                                    <input type="text" name="mod_website"
+                                           value="<?php echo($compteDatas->get_website()); ?>"/>
                                 </p>
                                 <p>
                                     <label for="mod_urlAvatar">Lien d'avatar</label>
-                                    <input type="text" name="mod_urlAvatar" value="<?php echo($compteDatas->get_urlAvatar()); ?>"/>
+                                    <input type="text" name="mod_urlAvatar"
+                                           value="<?php echo($compteDatas->get_urlAvatar()); ?>"/>
                                 </p>
                                 <p>
                                     <input type="submit" value="Enregistrer"/>

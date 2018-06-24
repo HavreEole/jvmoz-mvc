@@ -330,19 +330,15 @@ body {
 
                     /* "voir plus" */
 
-                    menu ul p {
+                    menu ul form {
                         margin: 16px 0 20px 0;
-                        padding: 2px 0 2px 9px;
+                        padding: 2px 0 2px 25px;
                         background-color: #b7a6a6;
                         border-radius: 20px 0 0 20px;
-                        font-family: titleFont;
-                        font-variant: small-caps;
-                        font-size: 1.1rem;
-                        font-weight: bold;
                     }
 
                     @media (max-width: 800px) {
-                        menu ul p {
+                        menu ul form {
                             display: inline-block;
                             margin: 3px 0 10px 5px;
                             padding: 2px 6px 2px 12px;
@@ -350,12 +346,20 @@ body {
                         }
                     }
 
-                        menu ul p a {
+                        menu ul form input {
+                            font-family: titleFont;
+                            font-variant: small-caps;
+                            font-size: 1.1rem;
+                            font-weight: bold;
                             color: #f0f0f0;
                             text-decoration: none;
+                            border: none;
+                            background: initial;
+                            box-shadow: initial;
+                            cursor: pointer;
                         }
 
-                        menu ul p a:hover {
+                        menu ul form input:hover {
                             color: #ffffff;
                             text-decoration: underline;
                         }
@@ -439,7 +443,7 @@ body {
 
             /* "Voir plus" */
 
-            #personnesListe p {
+            #personnesListe form {
                 margin: 12px 0 20px 0;
                 padding: 8px 0;
                 width: 100%;
@@ -447,18 +451,23 @@ body {
                 border: 5px solid #8b8db4;
                 box-shadow: 4px 4px 0 #dbd3d3;
                 border-radius: 2px;
-                font-variant: small-caps;
-                font-family: titleFont;
-                font-size: 1.1rem;
-                font-weight: bold;
+                text-align: center;
             }
 
-                #personnesListe p a {
+                #personnesListe form input {
                     text-decoration: none;
                     color: #d0d1ea;
+                    font-variant: small-caps;
+                    font-family: titleFont;
+                    font-size: 1.1rem;
+                    font-weight: bold;
+                    border: none;
+                    background: initial;
+                    box-shadow: initial;
+                    cursor: pointer;
                 }
 
-                #personnesListe p a:hover {
+                #personnesListe form input:hover {
                     text-decoration: underline;
                     color: white;
                 }
@@ -553,6 +562,9 @@ body {
                 #commonStyles .supArticle div div { border-width: 0; }
                 #commonStyles .formStyle div div { margin: 0 1%; }
 
+                #personneProfil div div:last-child { background-color: #4b4e6d; }
+                .projetProfil div div:first-child { background-color: #d9d0d0; }
+
                 .formStyle div div:first-child,
                 .subarticle div div,
                 .formStyle div div.notBlue {
@@ -560,6 +572,7 @@ body {
                     border: 0 solid white;
                     border-width: 0 1px 1px 1px;
                 }
+
                 .formStyle div div:last-child:not(:only-child):not(.notBlue),
                 .subArticle div.wrapper div {
                     background-color: #57597b;
@@ -583,12 +596,9 @@ body {
                         #commonStyles article div p span.hoverMdp {
                             padding: 0 15px;
                             background-color: #57597b;
-                            color: #d0d1ea;
-                        }
-                        #commonStyles article div p span.hoverMdp span {
                             color: #57597b;
                         }
-                        #commonStyles article div p span.hoverMdp:hover span {
+                        #commonStyles article div p span.hoverMdp:hover {
                             color: #d0d1ea;
                         }
 
@@ -596,8 +606,8 @@ body {
                             font-variant: small-caps;
                         }
                         .projetProfil div div p {
-                            background-color: #baa4a4;
-                            color: #2e2323;
+                            background-color: #c6b9b9;
+                            color: #3c2c2c;
                         }
 
                         #personneProfil div div p {
@@ -667,7 +677,7 @@ body {
                         /* les liens */
 
                         #personneProfil div div p a { color: #d0d1ea; }
-                        .projetProfil div div p a { color: #4d2222; }
+                        .projetProfil div div p a { color: #3e1f1f; }
                         #commonStyles article div div p a:hover { color: #fff; }
 
 
@@ -862,9 +872,5 @@ body {
             #commonStyles #personneProfil {
                 background: url('bg-blue.png'), #4b4e6d;
                 box-shadow: inset -4px -4px 4px #373a59;
-            }
-            #commonStyles .projetProfil {
-                background: url('bg-dark.png'), #d1c5c5;
-                box-shadow: inset -4px -4px 4px #c1b2b2;
             }
         }

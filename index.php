@@ -16,9 +16,17 @@
 
     $indexDatas = new indexDatas();
 
+    /*** Récupérer ou créer les informations de recherches ***/
+    $indexSessionDatas = ( isset($_SESSION['indexSessionDatas']) )
+        ? $_SESSION['indexSessionDatas']
+        : array(    'list'=>array(),
+                    'listOffset'=>array(8,0), // nb affiché, nb max.
+                    'menuOffset'=>array(6,0), // nb affiché, nb max.
+                    'indexSearch'=>''    );
+
     /* modèle du super-controleur */
     // requête vérifiant la concordance des tags présents dans l'url avec ceux de la BDD.
-    // le résultat est stocké dans $indexDatas et utilisé dans plusieurs modèles ensuite.
+    // le résultat est stocké dans $indexDatas et utilisé dans c_menu et c_list ensuite.
     include_once("modeles/m_index.php");
 
     /* controleurs */
@@ -27,6 +35,8 @@
     include_once("controleurs/c_list.php");
     include_once("controleurs/c_footer.php");
 
+    $_SESSION['indexSessionDatas'] = $indexSessionDatas;
+        
 ?>
 
 <script type="text/javascript" src="vues/scripts/menu.js"></script>

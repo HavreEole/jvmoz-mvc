@@ -25,10 +25,9 @@
         
         $numero = $compteDatas->get_numero();
         
-        // TODO safiser :
-        $nom = $_POST['mod_nom'];
-        $prenom = $_POST['mod_prenom'];
-        $pseudo = $_POST['mod_pseudo'];
+        $nom = Recuperation::getPostFromInput('mod_nom','identite');
+        $prenom = Recuperation::getPostFromInput('mod_prenom','identite');
+        $pseudo = Recuperation::getPostFromInput('mod_pseudo','l33tName');
         
         // Intégration dans la BDD
         wantIdentite($numero,$nom,$prenom,$pseudo);
@@ -46,18 +45,18 @@
         
         $numero = $compteDatas->get_numero();
         
-        // TODO safiser :
-        $email0 = $_POST['mod_email0'];
-        $email1 = $_POST['mod_email1'];
-        $email2 = $_POST['mod_email2'];
-        $mdp0 = $_POST['mod_mdp0'];
-        $mdp1 = $_POST['mod_mdp1'];
-        $mdp2 = $_POST['mod_mdp2'];
+        $email0 = Recuperation::getPostFromInput('mod_email0','email');
+        $email1 = Recuperation::getPostFromInput('mod_email1','email');
+        $email2 = Recuperation::getPostFromInput('mod_email2','email');
+        $mdp0Cru = $_POST['mod_mdp0'];
+        $mdp1Cru = $_POST['mod_mdp1'];
+        $mdp2Cru = $_POST['mod_mdp2'];
+        $newMdpSafe = Recuperation::getPostFromInput('mod_mdp1','mdp');
         
         // Intégration dans la BDD
-        if ( $email1 == $email2 && $mdp1 == $mdp2 ) {
+        if ( $email1 == $email2 && $mdp1Cru == $mdp2Cru ) {
             
-            $erreurTxt = wantConfidentiel($numero,$email0,$mdp0,$email1,$mdp1);
+            $erreurTxt = wantConfidentiel($numero,$email0,$mdp0Cru,$email1,$newMdpSafe);
             
         } else { $erreurTxt="Erreur : mauvaise confirmation."; }
         
@@ -70,8 +69,7 @@
         
         $numero = $compteDatas->get_numero();
         
-        // TODO safiser :
-        $description = $_POST['mod_description'];
+        $description = Recuperation::getPostFromInput('mod_description','desc');
         
         // Intégration dans la BDD
         wantDescription($numero,$description);
@@ -85,11 +83,25 @@
         
         $numero = $compteDatas->get_numero();
         
-        // TODO safiser :
-        $linkedin = $_POST['mod_linkedin'];
-        $twitter = $_POST['mod_twitter'];
-        $website = $_POST['mod_website'];
-        $urlAvatar = $_POST['mod_urlAvatar'];
+        $linkedin = Recuperation::getPostFromInput('mod_linkedin','link');
+        $twitter = Recuperation::getPostFromInput('mod_twitter','link');
+        $website = Recuperation::getPostFromInput('mod_website','link');
+        $urlAvatar = Recuperation::getPostFromInput('mod_urlAvatar','link');
+        
+        
+        // retirer @ ou les liens devant l'id linkedin.
+            // .* -> tout
+            // (?=.com\/in\/) -> ce qui est suivi par .com/in/
+            // (.com\/in\/) -> et aussi .com/in/
+            // /i -> case insensitive
+        $linkedin = preg_replace("/(@|(.*(?=.com\/in\/)(.com\/in\/))|(.*(?=.fr\/in\/)(.fr\/in\/)))/i", '', $linkedin);
+        
+        $twitter = preg_replace("/(@|(.*(?=.com\/)(.com\/))|(.*(?=.fr\/)(.fr\/) ))/i", '', $twitter);
+        
+        // vérifier que l'url de l'image envoie bien vers un .jpg ou .png
+        $verifImg = preg_match("/(.jpg)$|(.png)$/i", $urlAvatar);
+        if (!$verifImg) { $urlAvatar = ''; }
+        
         
         // Intégration dans la BDD
         wantLiens($numero,$linkedin,$twitter,$website,$urlAvatar);

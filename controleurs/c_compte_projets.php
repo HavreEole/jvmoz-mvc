@@ -6,7 +6,7 @@
         
         
     /*** La personne vient seulement d'arriver sur la page ***/
-    if ( $_POST['projets_gerer'] == 'Gérer vos projets' ) { // TODO safiser ?
+    if ( Recuperation::testValueFromInput('projets_gerer','Gérer vos projets') ) {
 
         // on ne fait rien, mais ça permet le else plus bas.
 
@@ -14,11 +14,10 @@
 
 
     /*** La personne veut lier un projet ***/
-    } else if ( $_POST['projets_gerer'] == 'lier_projet' ) { // TODO safiser ?
+    } else if ( Recuperation::testValueFromInput('projets_gerer','lier_projet') ) {
 
-        // TODO safiser :
-        $lier_nom = $_POST['lier_nom'];
-        $lier_mdp = $_POST['lier_mdp'];
+        $lier_nom = Recuperation::getPostFromInput('lier_nom','l33tName');
+        $lier_mdp = Recuperation::getPostFromInput('lier_mdp','passProjet');
 
         // Intégration dans la BDD
         $erreurTxt = wantLierProjet($safePersonneNum,$lier_nom,$lier_mdp);
@@ -27,12 +26,10 @@
 
 
     /*** La personne veut créer un projet ***/
-    } else if ( $_POST['projets_gerer'] == 'creer_projet' ) { // TODO safiser ?
+    } else if ( Recuperation::testValueFromInput('projets_gerer','creer_projet') ) {
 
-        // TODO safiser :
-        $creer_nom = $_POST['creer_nom'];
-        $creer_studio = $_POST['creer_studio'];
-        // TODO vérifier valeurs ni trop courtes ni trop longues
+        $creer_nom = Recuperation::getPostFromInput('creer_nom','l33tName');
+        $creer_studio = Recuperation::getPostFromInput('creer_studio','l33tName');
 
         // Intégration dans la BDD
         $erreurTxt = wantCreerProjet($safePersonneNum,$creer_nom,$creer_studio);
@@ -64,71 +61,71 @@
 
         
         /* Modifier le projet */
+        
+        if ( Recuperation::testNotEmptyPostFromInput('projets_gerer') ) {
+            switch ( $_POST['projets_gerer'] ) {
 
-        switch ( $_POST['projets_gerer'] ) { // TODO safiser ?
+                case 'modif_projet_infos' :
 
-            case 'modif_projet_infos' :
-                
-                // TODO safiser :
-                $modif_nom = $_POST['modif_nom'];
-                $modif_studio = $_POST['modif_studio'];
-                $modif_website = $_POST['modif_website'];
-                $modif_dateSortie = $_POST['modif_dateSortie'];
+                    $modif_nom = Recuperation::getPostFromInput('modif_nom','l33tName');
+                    $modif_studio = Recuperation::getPostFromInput('modif_studio','l33tName');
+                    $modif_website = Recuperation::getPostFromInput('modif_website','link');
+                    $modif_dateSortie = Recuperation::getPostFromInput('modif_dateSortie','date');
 
-                // Intégration dans la BDD
-                $erreurTxt = wantModifInfos(    $safePersonneNum,
-                                                $numProjet,
-                                                $modif_nom,
-                                                $modif_studio,
-                                                $modif_website,
-                                                $modif_dateSortie    );
-                
-            break;
+                    // Intégration dans la BDD
+                    $erreurTxt = wantModifInfos(    $safePersonneNum,
+                                                    $numProjet,
+                                                    $modif_nom,
+                                                    $modif_studio,
+                                                    $modif_website,
+                                                    $modif_dateSortie    );
 
-            case 'modif_projet_description' :
-                
-                $modif_description = $_POST['modif_description']; // TODO safiser
-                $erreurTxt = wantModifDescription($safePersonneNum,$numProjet,$modif_description);
-                
-            break;
+                break;
 
-            case 'modif_projet_urlVisuel' :
-                
-                $modif_urlVisuel = $_POST['modif_urlVisuel']; // TODO safiser
-                $erreurTxt = wantModifUrlVisuel($safePersonneNum,$numProjet,$modif_urlVisuel);
-                
-            break;
+                case 'modif_projet_description' :
 
-            case 'modif_projet_tags' :
-                
-                $erreurTxt = 'Soon soon !'; // TODO.
-                
-                // Renvoi vers la gestion des tags ... du projet.
-                //include_once("controleurs/c_compte_tags_projets.php");
-                // -> une page quasi identique à include_once("/vues/v_compte_tags.php");
-                // mais avec les numeros de projet plutôt que personne
-                // et surtout ça va pas du tout renvoyer sur les mêmes requetes
-                // sur le modèle...
-                // voir si la vue peut être mise en commun. :?
-                // juste le titre à changer, et le menu.
-                
-            break;
+                    $modif_description = Recuperation::getPostFromInput('modif_description','desc');
+                    $erreurTxt = wantModifDescription($safePersonneNum,$numProjet,$modif_description);
 
-            case 'modif_projet_mdp' :
-                
-                $erreurTxt = wantProjetPassword($safePersonneNum,$numProjet);
-                
-            break;
+                break;
 
-            case 'modif_projet_suppr' :
-                
-                // Retrait dans la BDD (et suppression si seule personne à afficher).
-                $erreurTxt = wantRetirerProjet($safePersonneNum,$numProjet);
-                
-            break;
+                case 'modif_projet_urlVisuel' :
 
-            default: break;
+                    $modif_urlVisuel = Recuperation::getPostFromInput('modif_urlVisuel','link');
+                    $erreurTxt = wantModifUrlVisuel($safePersonneNum,$numProjet,$modif_urlVisuel);
 
+                break;
+
+                case 'modif_projet_tags' :
+
+                    $erreurTxt = 'Soon soon !'; // TODO.
+
+                    // Renvoi vers la gestion des tags ... du projet.
+                    //include_once("controleurs/c_compte_tags_projets.php");
+                    // -> une page quasi identique à include_once("/vues/v_compte_tags.php");
+                    // mais avec les numeros de projet plutôt que personne
+                    // et surtout ça va pas du tout renvoyer sur les mêmes requetes sur le modèle...
+                    // voir si la vue peut être mise en commun. :?
+                    // juste le titre à changer, et le menu.
+
+                break;
+
+                case 'modif_projet_mdp' :
+
+                    $erreurTxt = wantProjetPassword($safePersonneNum,$numProjet);
+
+                break;
+
+                case 'modif_projet_suppr' :
+
+                    // Retrait dans la BDD (et suppression si seule personne à afficher).
+                    $erreurTxt = wantRetirerProjet($safePersonneNum,$numProjet);
+
+                break;
+
+                default: break;
+
+            }
         }
 
     }

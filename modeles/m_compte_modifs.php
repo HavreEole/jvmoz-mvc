@@ -13,6 +13,7 @@
     }
 
 
+
     function wantIdentite($numero,$nom,$prenom,$pseudo) {
 
         $pdo = new PDO(SERVEUR, USER, PASS);
@@ -27,7 +28,8 @@
     }
 
 
-    function wantConfidentiel($numero,$email0,$mdp0,$email='',$mdp='') {
+
+    function wantConfidentiel($numero,$email0,$mdpCru,$email='',$mdp='') {
         
         $erreurTxt = '';
         
@@ -41,7 +43,15 @@
         $resultat = $requete->fetch(PDO::FETCH_ASSOC);
         $requete->closeCursor(); $requete=NULL;
         
-        if ( $resultat['email'] == $email0 && $resultat['mdp'] == $mdp0 ) {
+        if (    $resultat['email'] == $email0
+                && password_verify($mdpCru,$resultat['mdp'])    ) {
+            
+            // Notes sur password_verify() :
+                // https://secure.php.net/manual/fr/function.password-verify.php
+                // password_verify($mdpTesté,$mdpDeBDD) -> renvoie true si ok.
+            // S'utilise en combinaison avec :
+                // https://secure.php.net/manual/fr/function.password-hash.php
+                // $safeGetThing = password_hash($safeGetThing, PASSWORD_BCRYPT);
             
             if ($email != '') { // remplacer l'email
                 $requete = $pdo->prepare('  UPDATE mz_personne
@@ -74,6 +84,8 @@
         
     }
 
+
+
     function wantDescription($numero,$description) {
         
         $pdo = new PDO(SERVEUR, USER, PASS);
@@ -86,6 +98,7 @@
         $requete->execute(array('description'=>$description,'numero'=>$numero));
         $requete->closeCursor(); $requete=NULL; $pdo = NULL; // fin de connexion.
     }
+
 
 
     function wantLiens($numero,$linkedin,$twitter,$website,$urlAvatar) {

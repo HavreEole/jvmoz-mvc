@@ -89,9 +89,10 @@
                             && Recuperation::testNotEmptyPostFromInput('capcha')   ) {
                     
                         // TESTS filter sanitize etc
-                        $safeLogin = Recuperation::getPostFromInput("email","email");
+                        $mdpCru = $_POST["mdp"];
                         $safeMdp = Recuperation::getPostFromInput("mdp","mdp");
-                        $safeCapcha = Recuperation::getPostFromInput("capcha","mdp");
+                        $safeLogin = Recuperation::getPostFromInput("email","email");
+                        $safeCapcha = Recuperation::getPostFromInput("capcha","passCapcha");
 
                         if ( $safeCapcha == "123" ) { // TEMP capcha en dur.
                         

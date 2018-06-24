@@ -5,27 +5,35 @@
     
         
     /*** La personne veut supprimer des tags ***/
-    if ( $_POST['tags_gerer'] == 'supr_tags' ) { // TODO safiser ?
-        foreach ($_POST as $aPostKey=>$aPostValue) { // TODO safiser ?
+    if ( Recuperation::testValueFromInput('tags_gerer','supr_tags') ) {
+        foreach ($_POST as $aPostKey=>$aPostValue) {
             if (strpos($aPostKey,"suprNum_") === 0) { // S'il y a un suprNum_xxx dans post,
-                suprTags ($safePersonneNum, $aPostValue); // c'est un tag à supprimer.
+                if (Recuperation::testValueNumero($aPostValue)) { // vérification numero legit
+                    suprTags ($safePersonneNum, $aPostValue); // c'est un tag à supprimer.
+                }
             }
         }
     }
+
+
 
     /*** La personne veut ajouter des tags ***/
-    if ( $_POST['tags_gerer'] == 'add_tags' ) { // TODO safiser ?
-        foreach ($_POST as $aPostKey=>$aPostValue) { // TODO safiser ?
+    if ( Recuperation::testValueFromInput('tags_gerer','add_tags') ) {
+        foreach ($_POST as $aPostKey=>$aPostValue) {
             if (strpos($aPostKey,"addNum_") === 0) { // S'il y a un addNum_xxx dans post,
-                addTags($safePersonneNum, $aPostValue); // c'est un tag à ajouter.
+                if (Recuperation::testValueNumero($aPostValue)) { // vérification numero legit
+                    addTags($safePersonneNum, $aPostValue); // c'est un tag à ajouter.
+                }
             }
         }
     }
 
-    /*** La personne veut créer un tag ***/
-    if ( $_POST['tags_gerer'] == 'create_tag' ) { // TODO safiser ?
 
-        $newTag = $_POST['create_tagTxt']; // TODO safiser.
+
+    /*** La personne veut créer un tag ***/
+    if ( Recuperation::testValueFromInput('tags_gerer','create_tag') ) {
+
+        $newTag = Recuperation::getPostFromInput('create_tagTxt','tag');
 
         if( strlen($newTag) > 20 ) { 
             $erreurTxt = 'Erreur : ce tag est trop long.';

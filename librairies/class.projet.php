@@ -31,7 +31,9 @@
                                       
                 foreach ( $anArray['equipe'] as $unePersonne ) {
                     
-                    $identite = ( $unePersonne['pseudo'] != '' ) ? $unePersonne['pseudo'] : $unePersonne['prenom'].' '.$unePersonne['nom'];
+                    $identite = ( $unePersonne['pseudo'] != '' )
+                                ? $unePersonne['pseudo']
+                                : $unePersonne['prenom'].' '.$unePersonne['nom'];
 
                     array_push($this->equipe,array('numero'=>$unePersonne['numero'],'identite'=>$identite));
                 }

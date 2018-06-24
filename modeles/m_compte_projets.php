@@ -32,8 +32,8 @@
             $requete->closeCursor(); $requete=NULL; unset($resultat);
 
             // récupérer les tags qui décrivent le projet
-            $requete = $pdo->prepare('  SELECT nom FROM mz_tags t
-                                        INNER JOIN mz_decrire d ON t.numero = d.numero_TAGS
+            $requete = $pdo->prepare('  SELECT nom FROM mz_tag t
+                                        INNER JOIN mz_decrire d ON t.numero = d.numero_TAG
                                         WHERE d.numero_PROJET = :numero');
             $requete->execute(array('numero' => $numProjet));
             $resultat = $requete->fetchAll(PDO::FETCH_COLUMN);
@@ -308,7 +308,7 @@
             $resultat = $requete->fetchColumn();
             $requete->closeCursor(); $requete=NULL;
             
-            $logErrorTxt = '<span class="hoverMdp">Survolez ce message pour afficher le mot de passe : <span>'.$resultat.'</span></span>';
+            $logErrorTxt = '<span>Survolez ce message pour afficher le mot de passe : <span class="hoverMdp">'.$resultat.'</span></span>';
             
             unset($resultat);
         }

@@ -36,7 +36,13 @@
 
                 <?php } ?>
                 
-                <p> <a href=''>Voir plus</a> </p>
+                <form method="post">
+                    <?php if( $indexSessionDatas['menuOffset'][0] < $indexSessionDatas['menuOffset'][1] ) { ?>
+                        <input type="submit" value="Voir plus" name="menu_voir_plus"/>
+                    <?php } else { ?>
+                        <input type="submit" value="Remise à zéro" name="menu_raz"/>
+                    <?php } ?>
+                </form>
 
             </ul>
         </menu>

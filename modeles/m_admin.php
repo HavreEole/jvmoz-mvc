@@ -28,7 +28,7 @@
         $mySearch = "%".$adminDatas['tagsSearch']."%";
         $myOffset = $adminDatas['tagsOffset'];
         
-        $requete = $pdo->prepare("  SELECT numero,nom,nbUsages FROM mz_tags
+        $requete = $pdo->prepare("  SELECT numero,nom,nbUsages FROM mz_tag
                                     WHERE nom LIKE :mySearch
                                     ORDER BY numero DESC LIMIT 12 OFFSET :myOffset ");
         $requete->execute(array('mySearch'=>$mySearch,'myOffset'=>$myOffset));
@@ -93,7 +93,7 @@
         $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         
         /*** Modifier le nom du tag ***/
-        $requete = $pdo->prepare(" UPDATE mz_tags SET nom=:nom WHERE numero = :numero ");
+        $requete = $pdo->prepare(" UPDATE mz_tag SET nom=:nom WHERE numero = :numero ");
         $requete->execute(array('nom'=>$nomTag,'numero'=>$numTag));
         $requete->closeCursor(); $requete=NULL; $pdo = NULL; // fin de connexion.
         
@@ -108,17 +108,17 @@
         $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         
         /*** Supprimer les liaisons avec les personnes ***/
-        $requete = $pdo->prepare(" DELETE FROM mz_depeindre WHERE numero_TAGS = :numero ");
+        $requete = $pdo->prepare(" DELETE FROM mz_depeindre WHERE numero_TAG = :numero ");
         $requete->execute(array('numero'=>$numTag));
         $requete->closeCursor(); $requete=NULL;
         
         /*** Supprimer les liaisons avec les projets ***/
-        $requete = $pdo->prepare(" DELETE FROM mz_decrire WHERE numero_TAGS = :numero ");
+        $requete = $pdo->prepare(" DELETE FROM mz_decrire WHERE numero_TAG = :numero ");
         $requete->execute(array('numero'=>$numTag));
         $requete->closeCursor(); $requete=NULL;
         
         /*** Supprimer le tag ***/
-        $requete = $pdo->prepare(" DELETE FROM mz_tags WHERE numero = :numero ");
+        $requete = $pdo->prepare(" DELETE FROM mz_tag WHERE numero = :numero ");
         $requete->execute(array('numero'=>$numTag));
         $requete->closeCursor(); $requete=NULL;
         

@@ -141,7 +141,8 @@
                         <div class="soloBox adminList">
                             
                             <?php if ( $adminDatas['tagsSearch'] != '' ) { ?>
-                                <h4>Vos résultats pour la recherche "<?php echo($adminDatas['tagsSearch']); ?>"<?php if ( count($adminDatas['tags']) == 0 ) { echo(' : aucun résultat.'); } ?></h4>
+                                <h4>Vos résultats pour la recherche "<?php echo($adminDatas['tagsSearch']); ?>"
+                                    <?php if ( count($adminDatas['tags']) == 0 ) { echo(' : aucun résultat.'); } ?></h4>
                             <?php } ?>
                             
                             <?php if ( count($adminDatas['tags']) > 0 ) { ?>
@@ -154,7 +155,8 @@
                                                     <em><?php echo($unTag['nbUsages']); ?></em>
                                                     <?php echo($unTag['nom']); ?>
                                                 </span>
-                                                <input type="hidden" value="<?php echo($unTag['numero']); ?>" name="admin_tags_gerer"/>
+                                                <input type="hidden" value="<?php echo($unTag['numero']); ?>"
+                                                       name="admin_tags_gerer"/>
                                                 <input type="hidden" value="" name="modif_tag_value"
                                                        id="mod_<?php echo($unTag['numero']); ?>" />
                                                 <input type="submit" value="Modifier" name="modif_tag"
