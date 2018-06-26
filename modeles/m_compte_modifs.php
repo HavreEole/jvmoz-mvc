@@ -1,14 +1,14 @@
  <?php 
 
 
-    function wantAfficherProfil($aNum) {
+    function wantAfficherProfil($aNum,$aMode) {
 
         $pdo = new PDO(SERVEUR, USER, PASS);
         $pdo->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
         $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         
-        $requete = $pdo->prepare('UPDATE mz_personne SET ban=:ban');
-        $requete->execute(array('ban' => $aNum));
+        $requete = $pdo->prepare('UPDATE mz_personne SET ban=:ban WHERE numero=:numero');
+        $requete->execute(array('numero' => $aNum,'ban' => $aMode));
         $requete->closeCursor(); $requete=NULL; $pdo = NULL; // fin de connexion.
         
     }

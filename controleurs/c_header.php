@@ -14,11 +14,6 @@
         $titre = 'Personnes de l\'industrie du jeu vidéo';
     }
 
-
-    /*** si connexion (nom/pseudo, modifier profil, se deconnecter) ***/
-    /*** si admin (admin) ***/
-    /*** sinon (se connecter) ***/
-
     include_once("/vues/v_header.php");
 
     unset($description);

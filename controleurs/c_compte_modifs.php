@@ -11,8 +11,9 @@
         if (    $compteDatas->get_nom() != null && $compteDatas->get_nom() != ''
                 && $compteDatas->get_description() != ''   ) {
             
+            $numero = $compteDatas->get_numero();
             $banNum = (isset($_POST['true_afficher'])) ? 0 : 2 ;
-            wantAfficherProfil($banNum);
+            wantAfficherProfil($numero,$banNum);
             
         } else { $erreurTxt="Erreur : pour pouvoir afficher votre profil, vous devez avoir enregistré un nom et une description."; }
         
