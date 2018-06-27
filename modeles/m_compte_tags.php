@@ -16,7 +16,7 @@
                                     ) as d ON d.numero_TAG = t.numero
                                     INNER JOIN mz_personne p ON d.numero_PERSONNE = p.numero
                                     WHERE p.ban = 0
-                                    GROUP BY t.nom ORDER BY nbUsages DESC    ');
+                                    GROUP BY d.numero_TAG ORDER BY nbUsages DESC    ');
         $resultat = $requete->fetchAll(PDO::FETCH_ASSOC);
         $compteDatas->set_allTags($resultat);
         $requete->closeCursor(); $requete=NULL; unset($resultat);

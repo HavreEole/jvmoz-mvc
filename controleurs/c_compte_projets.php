@@ -1,6 +1,6 @@
 <?php
 
-    include_once("/modeles/m_compte_projets.php");
+    include_once("modeles/m_compte_projets.php");
 
 
         
@@ -102,7 +102,7 @@
 
                     // Renvoi vers la gestion des tags ... du projet.
                     //include_once("controleurs/c_compte_tags_projets.php");
-                    // -> une page quasi identique à include_once("/vues/v_compte_tags.php");
+                    // -> une page quasi identique à include_once("vues/v_compte_tags.php");
                     // mais avec les numeros de projet plutôt que personne
                     // et surtout ça va pas du tout renvoyer sur les mêmes requetes sur le modèle...
                     // voir si la vue peut être mise en commun. :?
@@ -135,6 +135,6 @@
 
     /*** Afficher le formulaire ***/
     getProjetsInfos($safePersonneNum,$compteDatas);
-    include_once("/vues/v_compte_projets.php");
+    include_once("vues/v_compte_projets.php");
 
 ?>

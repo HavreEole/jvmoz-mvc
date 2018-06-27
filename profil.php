@@ -7,13 +7,13 @@
     error_reporting(E_ALL); ini_set('display_errors', 0);
 
     /* Infos de connexion */
-    include("/modeles/conf.php");
+    include("modeles/conf.php");
 
     /* Classes */
-    include_once("/librairies/class.recuperation.php");
-    include_once("/librairies/class.profildatas.php");
-    include_once("/librairies/class.personne.php");
-    include_once("/librairies/class.projet.php");
+    include_once("librairies/class.recuperation.php");
+    include_once("librairies/class.profildatas.php");
+    include_once("librairies/class.personne.php");
+    include_once("librairies/class.projet.php");
 
     $profilDatas = new profildatas();
 

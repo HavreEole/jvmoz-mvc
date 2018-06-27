@@ -36,7 +36,7 @@
                                     ) as d ON d.numero_TAG = t.numero
                                     INNER JOIN mz_personne p ON d.numero_PERSONNE = p.numero
                                     WHERE p.ban = 0 AND t.nom LIKE :mySearch
-                                    GROUP BY t.nom ORDER BY nbUsages DESC LIMIT 12 OFFSET :myOffset ");
+                                    GROUP BY d.numero_TAG ORDER BY nbUsages DESC LIMIT 12 OFFSET :myOffset ");
         $requete->execute(array('mySearch'=>$mySearch,'myOffset'=>$myOffset));
         $resultat = $requete->fetchAll(PDO::FETCH_ASSOC);
         $adminDatas['tags'] = $resultat;

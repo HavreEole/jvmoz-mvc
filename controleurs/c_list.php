@@ -4,7 +4,7 @@
             
         try {
             
-            include_once("/modeles/m_list.php");
+            include_once("modeles/m_list.php");
             
             
             
@@ -127,14 +127,14 @@
             
             
             /*** On affiche la liste. ***/
-            include_once("/vues/v_list.php");
+            include_once("vues/v_list.php");
             
             
 
             
         } catch (exception $e) {
-            die("<section><header>Erreur - Accès refusé</header></section>");
-            //die($e->getMessage());
+            //die("<section><header>Erreur - Accès refusé</header></section>");
+            die($e->getMessage());
         }
             
     }

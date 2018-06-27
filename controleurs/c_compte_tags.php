@@ -1,6 +1,6 @@
 <?php
 
-    include_once("/modeles/m_compte_tags.php");
+    include_once("modeles/m_compte_tags.php");
 
     
         
@@ -57,6 +57,6 @@
 
     /*** Afficher le formulaire ***/
     getTagsInfos($safePersonneNum,$compteDatas);
-    include_once("/vues/v_compte_tags.php");
+    include_once("vues/v_compte_tags.php");
 
 ?>

@@ -15,8 +15,8 @@
                 $safePersonneNum = $_SESSION['numLogged']; // TODO vérifier safitude
                 if ($safePersonneNum != null || $safePersonneNum === 0) { // pas de problèmes avec la session.
                     
-                    include_once("/librairies/class.projet.php");
-                    include_once("/librairies/class.comptedatas.php");
+                    include_once("librairies/class.projet.php");
+                    include_once("librairies/class.comptedatas.php");
                     $compteDatas = new comptedatas();
                     
                     
@@ -32,7 +32,7 @@
                     /* Sinon on affiche la gestion générale du profil */
                     } else {
                         
-                        include_once("/modeles/m_compte.php");
+                        include_once("modeles/m_compte.php");
                         
                         
                         if ( !empty($_POST) ) { // Si un autre formulaire a été rempli,
@@ -45,7 +45,7 @@
                             
                             if ($erreurTxt != '') { // en cas d'erreur on affiche l'erreur.
                                 unset($_POST);
-                                include_once("/vues/v_compte.php");
+                                include_once("vues/v_compte.php");
                                 unset($erreurTxt);
                                 
                             } else  { // sinon on redirect pour obtenir un formulaire à jour.
@@ -55,7 +55,7 @@
                             
                         
                         } else { // sinon on affiche le formulaire.
-                            include_once("/vues/v_compte.php");
+                            include_once("vues/v_compte.php");
                             
                         }
                         
@@ -73,7 +73,7 @@
                 /* Si le formulaire n'a pas été rempli, on l'affiche. */
                 if ( empty($_POST) ) {
                     
-                    include_once("/vues/v_connexion.php");
+                    include_once("vues/v_connexion.php");
                     
                     
                 /* S'il a été rempli, on vérifie les données entrées. */
@@ -99,7 +99,7 @@
                             $wantInscription = isset($_POST['sinscrire']);
                             
                             // TESTS avec la DB
-                            include_once("/modeles/m_connexion.php");
+                            include_once("modeles/m_connexion.php");
                             
                             if ($erreurTxt == '') {
                                 
@@ -125,7 +125,7 @@
                     // s'il y a eu une erreur, retry :
                     if ( $erreurTxt != '' ) {
                         unset($_POST);
-                        include_once("/vues/v_connexion.php");
+                        include_once("vues/v_connexion.php");
                         unset($erreurTxt);
                     }
                     
@@ -137,10 +137,10 @@
 
         } catch (exception $e) {
             $erreurTxt = "Erreur - Accès refusé";
-            include_once("/vues/v_erreur.php");
-            include_once("/controleurs/c_footer.php");
+            include_once("vues/v_erreur.php");
+            include_once("controleurs/c_footer.php");
             unset($erreurTxt);
-            // die($e->getMessage());
+            //die($e->getMessage());
         }
             
     }

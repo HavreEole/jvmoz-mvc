@@ -1,6 +1,6 @@
 <?php
 
-    include_once("/modeles/m_compte_modifs.php");
+    include_once("modeles/m_compte_modifs.php");
 
 
 

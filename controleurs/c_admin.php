@@ -29,7 +29,7 @@
                                         'tagsOffset'=>0,
                                         'tagsSearch'=>''    );
                         
-                        include_once("/modeles/m_admin.php");
+                        include_once("modeles/m_admin.php");
                             
                         
                         
@@ -123,7 +123,7 @@
                         /*** Résultat des manipulations ***/
                         unset($_POST);
                         $adminDatas = getAdminAllSearch($adminDatas);
-                        include_once("/vues/v_admin.php");
+                        include_once("vues/v_admin.php");
                         $_SESSION['adminDatas'] = $adminDatas;
                         
                         
@@ -135,16 +135,16 @@
             if ( $erreurTxt == "NOPE" ) {
                 
                 $erreurTxt = "Erreur - Accès refusé";
-                include_once("/vues/v_erreur.php");
-                include_once("/controleurs/c_footer.php");
+                include_once("vues/v_erreur.php");
+                include_once("controleurs/c_footer.php");
             }
             
             unset($erreurTxt);
             
         } catch (exception $e) {
             $erreurTxt = "Erreur - Accès refusé";
-            include_once("/vues/v_erreur.php");
-            include_once("/controleurs/c_footer.php");
+            include_once("vues/v_erreur.php");
+            include_once("controleurs/c_footer.php");
             unset($erreurTxt);
             // die($e->getMessage());
         }

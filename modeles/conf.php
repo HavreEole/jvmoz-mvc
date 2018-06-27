@@ -7,8 +7,8 @@
         //    Réécrire une URL : https://www.digitalocean.com/community/tutorials/how-to-set-up-mod_rewrite
 
     // Données de connexion.
-    DEFINE ('SERVEUR', 'mysql:host=localhost;dbname=mosaic;port=3306;charset=utf8');
+    DEFINE ('SERVEUR', 'mysql:host=localhost;dbname=mvc_mosaic;port=3306;charset=utf8');
     DEFINE ('USER', 'root'); // utilisateur
-    DEFINE ('PASS', ''); // password
+    DEFINE ('PASS', 'jvm0zG4ndi//'); // password
 
 ?>

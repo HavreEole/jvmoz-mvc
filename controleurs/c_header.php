@@ -2,7 +2,7 @@
 
     $titre;
     $description;
-   
+
     if (isset($isProfil)) {
         $identite = $profilDatas->get_onePersonneInfo( $profilDatas->get_profilPersonneNum() )->get_Identite();
         
@@ -14,7 +14,7 @@
         $titre = 'Personnes de l\'industrie du jeu vidéo';
     }
 
-    include_once("/vues/v_header.php");
+    include_once("vues/v_header.php");
 
     unset($description);
     unset($titre);
