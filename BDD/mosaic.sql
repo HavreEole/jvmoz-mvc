@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.7.4
+-- version 4.7.7
 -- https://www.phpmyadmin.net/
 --
--- Hôte : 127.0.0.1:3306
--- Généré le :  Dim 24 juin 2018 à 19:15
--- Version du serveur :  5.7.19
--- Version de PHP :  5.6.31
+-- Hôte : localhost
+-- Généré le :  lun. 09 juil. 2018 à 16:05
+-- Version du serveur :  5.7.20-18-log
+-- Version de PHP :  7.1.13
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -19,7 +19,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de données :  `mosaic`
+-- Base de données :  `mvc_mosaic`
 --
 
 -- --------------------------------------------------------
@@ -28,15 +28,11 @@ SET time_zone = "+00:00";
 -- Structure de la table `mz_decrire`
 --
 
-DROP TABLE IF EXISTS `mz_decrire`;
-CREATE TABLE IF NOT EXISTS `mz_decrire` (
-  `numero` smallint(5) UNSIGNED NOT NULL AUTO_INCREMENT,
+CREATE TABLE `mz_decrire` (
+  `numero` smallint(5) UNSIGNED NOT NULL,
   `numero_PROJET` smallint(5) UNSIGNED NOT NULL,
-  `numero_TAG` smallint(5) UNSIGNED NOT NULL,
-  PRIMARY KEY (`numero`),
-  KEY `FK_DECRIRE_numero_PROJET` (`numero_PROJET`),
-  KEY `FK_DECRIRE_numero_TAGS` (`numero_TAG`)
-) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8;
+  `numero_TAG` smallint(5) UNSIGNED NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Déchargement des données de la table `mz_decrire`
@@ -71,15 +67,11 @@ INSERT INTO `mz_decrire` (`numero`, `numero_PROJET`, `numero_TAG`) VALUES
 -- Structure de la table `mz_depeindre`
 --
 
-DROP TABLE IF EXISTS `mz_depeindre`;
-CREATE TABLE IF NOT EXISTS `mz_depeindre` (
-  `numero` smallint(5) UNSIGNED NOT NULL AUTO_INCREMENT,
+CREATE TABLE `mz_depeindre` (
+  `numero` smallint(5) UNSIGNED NOT NULL,
   `numero_PERSONNE` smallint(5) UNSIGNED NOT NULL,
-  `numero_TAG` smallint(5) UNSIGNED NOT NULL,
-  PRIMARY KEY (`numero`),
-  KEY `FK_DEPEINDRE_numero_PERSONNE` (`numero_PERSONNE`),
-  KEY `FK_DEPEINDRE_numero_TAGS` (`numero_TAG`)
-) ENGINE=InnoDB AUTO_INCREMENT=128 DEFAULT CHARSET=utf8;
+  `numero_TAG` smallint(5) UNSIGNED NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Déchargement des données de la table `mz_depeindre`
@@ -106,12 +98,7 @@ INSERT INTO `mz_depeindre` (`numero`, `numero_PERSONNE`, `numero_TAG`) VALUES
 (19, 4, 13),
 (20, 5, 14),
 (41, 20, 19),
-(51, 31, 28),
-(52, 31, 10),
 (53, 31, 6),
-(54, 31, 14),
-(55, 31, 15),
-(56, 31, 25),
 (57, 2, 11),
 (59, 2, 17),
 (64, 0, 7),
@@ -166,7 +153,72 @@ INSERT INTO `mz_depeindre` (`numero`, `numero_PERSONNE`, `numero_TAG`) VALUES
 (121, 30, 29),
 (122, 30, 5),
 (124, 0, 18),
-(125, 0, 17);
+(128, 0, 21),
+(129, 0, 32),
+(132, 31, 35),
+(133, 31, 36),
+(135, 31, 38),
+(138, 31, 41),
+(140, 31, 43),
+(144, 2, 34),
+(146, 2, 37),
+(147, 2, 41),
+(149, 29, 33),
+(150, 29, 37),
+(151, 29, 36),
+(152, 29, 44),
+(153, 20, 33),
+(154, 20, 32),
+(155, 20, 45),
+(156, 20, 46),
+(157, 3, 41),
+(158, 3, 44),
+(159, 3, 38),
+(160, 3, 47),
+(161, 4, 41),
+(162, 4, 32),
+(164, 5, 45),
+(165, 5, 47),
+(166, 6, 46),
+(167, 7, 33),
+(168, 7, 34),
+(169, 7, 36),
+(170, 8, 47),
+(171, 8, 27),
+(172, 8, 48),
+(173, 9, 37),
+(174, 9, 44),
+(175, 9, 43),
+(176, 12, 33),
+(177, 12, 41),
+(178, 12, 44),
+(179, 12, 30),
+(180, 12, 27),
+(181, 12, 32),
+(182, 13, 34),
+(183, 13, 47),
+(184, 14, 33),
+(185, 15, 49),
+(186, 15, 33),
+(189, 17, 32),
+(190, 17, 49),
+(191, 18, 21),
+(192, 18, 20),
+(193, 18, 48),
+(194, 18, 17),
+(195, 21, 49),
+(196, 22, 22),
+(197, 22, 35),
+(198, 22, 24),
+(199, 24, 45),
+(200, 23, 49),
+(201, 31, 44),
+(202, 16, 33),
+(203, 16, 44),
+(204, 32, 28),
+(205, 32, 6),
+(206, 32, 36),
+(207, 32, 51);
 
 -- --------------------------------------------------------
 
@@ -174,9 +226,8 @@ INSERT INTO `mz_depeindre` (`numero`, `numero_PERSONNE`, `numero_TAG`) VALUES
 -- Structure de la table `mz_personne`
 --
 
-DROP TABLE IF EXISTS `mz_personne`;
-CREATE TABLE IF NOT EXISTS `mz_personne` (
-  `numero` smallint(5) UNSIGNED NOT NULL AUTO_INCREMENT,
+CREATE TABLE `mz_personne` (
+  `numero` smallint(5) UNSIGNED NOT NULL,
   `email` tinytext,
   `mdp` tinytext,
   `admin` tinyint(1) DEFAULT NULL,
@@ -188,9 +239,8 @@ CREATE TABLE IF NOT EXISTS `mz_personne` (
   `linkedin` tinytext,
   `website` tinytext,
   `description` text,
-  `urlAvatar` tinytext,
-  PRIMARY KEY (`numero`)
-) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=utf8;
+  `urlAvatar` tinytext
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Déchargement des données de la table `mz_personne`
@@ -228,8 +278,8 @@ INSERT INTO `mz_personne` (`numero`, `email`, `mdp`, `admin`, `ban`, `prenom`, `
 (28, 'fleur@fleur.com', '$2y$10$hlPn8u3ai1bz3wAIJolKlundzN1kO/JR290vvMoZjgaLu0WQahU/y', 0, 0, 'Petit', '', 'Bouquet', '', 'forest', 'forest.com', 'Any technology that we create is going to reflect both our aspirations and our limitations', 'vues/img/avatars/28.jpg'),
 (29, 'sand@sand.com', '$2y$10$Rv2GXD5kFuHE55QWEWhH6uvsNrJldCsiXaO1.DnItn6cQ61n2ER8u', 0, 0, 'Sand', '', 'Marine', '', '', '', 'If we are limited when it comes to being inclusive that\'s going to be reflected in the robots we develop or the tech that\'s incorporated within the robots.', 'vues/img/avatars/29.jpg'),
 (30, 'lili@mana.com', '$2y$10$KkLCGg1h11ozw9SGX1RlQOxXunBQGkMS/XD/X1RRFNAJc1yX/96tO', 0, 0, 'Lila', '', 'Manager', '', '', '', 'Ms Buolamwini says she is hopeful that the situation will improve if people are more aware of the potential problems.', 'vues/img/avatars/30.jpg'),
-(31, 'toto@toto.com', '$2y$10$eROx04qJWNHBR.mXr8qBBOiC15dWLENjKxlTXCtytnhf6i8WD4BkO', 0, 1, 'Tototo', '', 'Poireau', 'totoyo', '', '', 'J\'aime les melons et les bonbons, ron ron petit patapon !', 'vues/img/avatars/0.jpg'),
-(32, 'aloe@vera.fr', '$2y$10$5EJW4rROoX/jzJKCXaqVc.Kl6lrYBb.wiK8YH2L9RqBoS.Y1ut/32', 1, 0, 'Aloe', '', 'Vera', NULL, NULL, NULL, 'Des plantes des plantes des plantes ! ♥', 'vues/img/avatars/0.jpg');
+(31, 'toto@toto.com', '$2y$10$eROx04qJWNHBR.mXr8qBBOiC15dWLENjKxlTXCtytnhf6i8WD4BkO', 0, 0, 'Tototo', '', 'Poireau', 'totoyo', '', '', 'J\'aime les melons et les bonbons, ron ron petit patapon !', 'vues/img/avatars/0.jpg'),
+(32, 'aloe@vera.fr', '$2y$10$5EJW4rROoX/jzJKCXaqVc.Kl6lrYBb.wiK8YH2L9RqBoS.Y1ut/32', 1, 0, 'Aloe', '', 'Vera', '', '', '', 'Des plantes des plantes des plantes ! ♥', 'http://fenntasy.com/wanuts/home/img/games/flowers.png');
 
 -- --------------------------------------------------------
 
@@ -237,18 +287,16 @@ INSERT INTO `mz_personne` (`numero`, `email`, `mdp`, `admin`, `ban`, `prenom`, `
 -- Structure de la table `mz_projet`
 --
 
-DROP TABLE IF EXISTS `mz_projet`;
-CREATE TABLE IF NOT EXISTS `mz_projet` (
-  `numero` smallint(5) UNSIGNED NOT NULL AUTO_INCREMENT,
+CREATE TABLE `mz_projet` (
+  `numero` smallint(5) UNSIGNED NOT NULL,
   `mdp` tinytext,
   `nom` tinytext,
   `studio` tinytext,
   `description` text,
   `dateSortie` date DEFAULT NULL,
   `website` tinytext,
-  `urlVisuel` tinytext,
-  PRIMARY KEY (`numero`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
+  `urlVisuel` tinytext
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Déchargement des données de la table `mz_projet`
@@ -264,7 +312,7 @@ INSERT INTO `mz_projet` (`numero`, `mdp`, `nom`, `studio`, `description`, `dateS
 (6, '_iTUPJW&Og39KeqXvMn&', 'Salopette Nocturne', 'Vampire', 'La spéléologie pour les chauve-souris.', '2001-01-01', 'yop.com', 'vues/img/visuels/6.jpg'),
 (7, '7GnWQd6BRJHyYk&rhNqi', 'Lumière Bonsoir', 'Repos', 'C\'est très tranquille.', '2001-01-01', 'hiphip.com', 'vues/img/visuels/7.jpg'),
 (8, '&v93p5WfFXij1n&_NHsh', 'Poisson ici famille', 'Ocean', 'Un jeu avec des familles de poissons. Des fois ils ont des points communs, mais faut pas le dire.', NULL, '', 'vues/img/visuels/8.jpg'),
-(9, 'X4pNehgDrRMxwV_KbZzd', 'Patience', 'Reflexion', 'Ca s\'appelle Patience mais en fait c\'est vachement rapide, c\'est un concept.', '2018-06-29', 'krr.com', 'vues/img/visuels/9.jpg');
+(9, 'X4pNehgDrRMxwV_KbZzd', 'Patience', 'Reflexion', 'Ca s\'appelle Patience mais en fait c\'est vachement rapide, c\'est un concept.', '2018-06-29', 'patience.com', 'vues/img/visuels/9.jpg');
 
 -- --------------------------------------------------------
 
@@ -272,12 +320,10 @@ INSERT INTO `mz_projet` (`numero`, `mdp`, `nom`, `studio`, `description`, `dateS
 -- Structure de la table `mz_tag`
 --
 
-DROP TABLE IF EXISTS `mz_tag`;
-CREATE TABLE IF NOT EXISTS `mz_tag` (
-  `numero` smallint(5) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `nom` tinytext,
-  PRIMARY KEY (`numero`)
-) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=utf8;
+CREATE TABLE `mz_tag` (
+  `numero` smallint(5) UNSIGNED NOT NULL,
+  `nom` tinytext
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Déchargement des données de la table `mz_tag`
@@ -313,7 +359,23 @@ INSERT INTO `mz_tag` (`numero`, `nom`) VALUES
 (27, 'Tool Dev'),
 (28, '2D'),
 (29, 'Indie'),
-(30, 'Developpement');
+(30, 'Developpement'),
+(32, 'Bordeaux'),
+(33, 'Femme'),
+(34, 'Queer'),
+(35, 'Etudiante'),
+(36, 'Paris'),
+(37, 'Politique'),
+(38, 'Non Binaire'),
+(41, 'Militante'),
+(43, 'Utopie'),
+(44, 'Carewave'),
+(45, 'Diversite'),
+(46, 'Handi'),
+(47, 'Neuroatypique'),
+(48, 'Afrofuturisme'),
+(49, 'Senior'),
+(51, 'Intersexe');
 
 -- --------------------------------------------------------
 
@@ -321,15 +383,11 @@ INSERT INTO `mz_tag` (`numero`, `nom`) VALUES
 -- Structure de la table `mz_travailler`
 --
 
-DROP TABLE IF EXISTS `mz_travailler`;
-CREATE TABLE IF NOT EXISTS `mz_travailler` (
-  `numero` smallint(5) UNSIGNED NOT NULL AUTO_INCREMENT,
+CREATE TABLE `mz_travailler` (
+  `numero` smallint(5) UNSIGNED NOT NULL,
   `numero_PERSONNE` smallint(5) UNSIGNED NOT NULL,
-  `numero_PROJET` smallint(5) UNSIGNED NOT NULL,
-  PRIMARY KEY (`numero`),
-  KEY `FK_TRAVAILLER_numero_PERSONNE` (`numero_PERSONNE`),
-  KEY `FK_TRAVAILLER_numero_PROJET` (`numero_PROJET`)
-) ENGINE=InnoDB AUTO_INCREMENT=53 DEFAULT CHARSET=utf8;
+  `numero_PROJET` smallint(5) UNSIGNED NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Déchargement des données de la table `mz_travailler`
@@ -362,6 +420,92 @@ INSERT INTO `mz_travailler` (`numero`, `numero_PERSONNE`, `numero_PROJET`) VALUE
 (44, 20, 9),
 (45, 24, 6),
 (52, 0, 9);
+
+--
+-- Index pour les tables déchargées
+--
+
+--
+-- Index pour la table `mz_decrire`
+--
+ALTER TABLE `mz_decrire`
+  ADD PRIMARY KEY (`numero`),
+  ADD KEY `FK_DECRIRE_numero_PROJET` (`numero_PROJET`),
+  ADD KEY `FK_DECRIRE_numero_TAGS` (`numero_TAG`);
+
+--
+-- Index pour la table `mz_depeindre`
+--
+ALTER TABLE `mz_depeindre`
+  ADD PRIMARY KEY (`numero`),
+  ADD KEY `FK_DEPEINDRE_numero_PERSONNE` (`numero_PERSONNE`),
+  ADD KEY `FK_DEPEINDRE_numero_TAGS` (`numero_TAG`);
+
+--
+-- Index pour la table `mz_personne`
+--
+ALTER TABLE `mz_personne`
+  ADD PRIMARY KEY (`numero`);
+
+--
+-- Index pour la table `mz_projet`
+--
+ALTER TABLE `mz_projet`
+  ADD PRIMARY KEY (`numero`);
+
+--
+-- Index pour la table `mz_tag`
+--
+ALTER TABLE `mz_tag`
+  ADD PRIMARY KEY (`numero`);
+
+--
+-- Index pour la table `mz_travailler`
+--
+ALTER TABLE `mz_travailler`
+  ADD PRIMARY KEY (`numero`),
+  ADD KEY `FK_TRAVAILLER_numero_PERSONNE` (`numero_PERSONNE`),
+  ADD KEY `FK_TRAVAILLER_numero_PROJET` (`numero_PROJET`);
+
+--
+-- AUTO_INCREMENT pour les tables déchargées
+--
+
+--
+-- AUTO_INCREMENT pour la table `mz_decrire`
+--
+ALTER TABLE `mz_decrire`
+  MODIFY `numero` smallint(5) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+
+--
+-- AUTO_INCREMENT pour la table `mz_depeindre`
+--
+ALTER TABLE `mz_depeindre`
+  MODIFY `numero` smallint(5) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=208;
+
+--
+-- AUTO_INCREMENT pour la table `mz_personne`
+--
+ALTER TABLE `mz_personne`
+  MODIFY `numero` smallint(5) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
+
+--
+-- AUTO_INCREMENT pour la table `mz_projet`
+--
+ALTER TABLE `mz_projet`
+  MODIFY `numero` smallint(5) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+
+--
+-- AUTO_INCREMENT pour la table `mz_tag`
+--
+ALTER TABLE `mz_tag`
+  MODIFY `numero` smallint(5) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=52;
+
+--
+-- AUTO_INCREMENT pour la table `mz_travailler`
+--
+ALTER TABLE `mz_travailler`
+  MODIFY `numero` smallint(5) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
 
 --
 -- Contraintes pour les tables déchargées

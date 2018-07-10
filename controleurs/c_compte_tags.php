@@ -48,7 +48,7 @@
             $newTag = ucwords($newTag); // maj devant chaque mot
 
             $tagAlreadyExist = createTag($safePersonneNum, $newTag);
-            if ($tagAlreadyExist) { $erreurTxt = 'Erreur : ce tag existe déjà.'; }
+            if ($tagAlreadyExist) { $erreurTxt = 'Ce tag existe déjà, il a été ajouté à votre liste.'; }
 
         }
     }

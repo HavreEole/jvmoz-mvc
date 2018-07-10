@@ -19,6 +19,7 @@
                                 <div>
                                     <img src="<?php echo $theInfos['urlAvatar'] ?>" alt="Avatar de <?php echo $theInfos['identite'] ?>">
                                     <span><?php echo $theInfos['identite'] ?></span>
+                                    <span class="myDescr"><?php echo $theInfos['description'] ?></span>
                                 </div>
                             </a>
                         </article>

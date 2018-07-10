@@ -222,7 +222,7 @@
                     
                     $safeGetThing = trim($safeGetThing);
                     $safeGetThing = substr($safeGetThing,0,20);
-                    $safeGetThing = preg_replace("/[^a-zA-Z ]/", '', $safeGetThing);
+                    $safeGetThing = preg_replace("/[^a-zA-Z0-9 ]/", '', $safeGetThing);
                     
                     return $safeGetThing;
                     break;

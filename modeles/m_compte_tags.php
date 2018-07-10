@@ -82,6 +82,27 @@
             $requete->execute(array('numero' => $resultat));
             $requete->closeCursor(); $requete=NULL;
             
+            /*** vérifier si le tag est encore utilisé par qqun ***/
+            $requete = $pdo->prepare(" SELECT DISTINCT count(d.numero_TAG) FROM mz_tag t
+                                    INNER JOIN (
+                                        SELECT numero_PERSONNE,numero_TAG FROM mz_depeindre d1
+                                        UNION SELECT numero_PERSONNE,numero_TAG FROM mz_decrire d2
+                                        INNER JOIN mz_travailler tr ON d2.numero_PROJET = tr.numero_PROJET
+                                    ) as d ON d.numero_TAG = t.numero
+                                    INNER JOIN mz_personne p ON d.numero_PERSONNE = p.numero
+                                    WHERE p.ban = 0 AND t.nom = :nom_t
+                                    GROUP BY d.numero_TAG ");
+            $requete->execute(array('nom_t' => $aTagNom));
+            $resultat = $requete->fetchColumn();
+            $requete->closeCursor(); $requete=NULL;
+            
+            /*** si plus personne ne l'utilise on le supprime ***/
+            if ( $resultat === false ) {
+                $requete = $pdo->prepare(" DELETE FROM mz_tag WHERE nom = :nom_t ");
+                $requete->execute(array('nom_t' => $aTagNom));
+                $requete->closeCursor(); $requete=NULL;
+            }
+            
         }
         
         unset($resultat); $pdo = NULL; // fin de connexion.
@@ -109,26 +130,40 @@
             $requete->execute(array('nom' => $aTagNom));
             $requete->closeCursor(); $requete=NULL;
             
-            /*** récupérer son numéro ***/
-            $requete = $pdo->prepare('SELECT numero FROM mz_tag WHERE nom = :nom');
-            $requete->execute(array('nom' => $aTagNom));
+        } else {
+            
+            $tagAlreadyExist = true; // Le tag existe déjà.
+            
+            /*** vérifier qu'il n'est pas déjà lié au compte ***/
+            $requete = $pdo->prepare('  SELECT d.numero FROM mz_depeindre d
+                            INNER JOIN mz_tag t ON t.numero = d.numero_TAG
+                            WHERE numero_PERSONNE = :numero_p AND t.nom = :nom_t');
+            $requete->execute(array('numero_p' => $numero,'nom_t' => $aTagNom));
             $resultat = $requete->fetchColumn();
             $requete->closeCursor(); $requete=NULL;
             
-            /*** et lier le compte à ce tag ***/
-            $requete = $pdo->prepare('  INSERT INTO mz_depeindre(numero_PERSONNE,numero_TAG)
-                                        VALUES (:numero_p,:numero_t)');
-            $requete->execute(array('numero_p' => $numero,'numero_t' => $resultat));
-            $requete->closeCursor(); $requete=NULL;
-            
-        } else {
-            
-            $tagAlreadyExist = true; // erreur
-            
+            /*** si c'est le cas on quitte la fonction. ***/
+            if ($resultat != false) {
+                unset($resultat); $pdo = NULL; // fin de connexion.
+                return $tagAlreadyExist;
+            }
+        
         }
         
-            unset($resultat); $pdo = NULL; // fin de connexion.
-            return $tagAlreadyExist;
+        /*** récupérer le numéro du tag ***/
+        $requete = $pdo->prepare('SELECT numero FROM mz_tag WHERE nom = :nom');
+        $requete->execute(array('nom' => $aTagNom));
+        $resultat = $requete->fetchColumn();
+        $requete->closeCursor(); $requete=NULL;
+
+        /*** et lier le compte à ce tag ***/
+        $requete = $pdo->prepare('  INSERT INTO mz_depeindre(numero_PERSONNE,numero_TAG)
+                                    VALUES (:numero_p,:numero_t)');
+        $requete->execute(array('numero_p' => $numero,'numero_t' => $resultat));
+        $requete->closeCursor(); $requete=NULL;
+        
+        unset($resultat); $pdo = NULL; // fin de connexion.
+        return $tagAlreadyExist;
         
     }
 

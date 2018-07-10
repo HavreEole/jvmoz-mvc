@@ -133,8 +133,8 @@
 
             
         } catch (exception $e) {
-            //die("<section><header>Erreur - Accès refusé</header></section>");
-            die($e->getMessage());
+            die("<section><header>Erreur - Accès refusé</header></section>");
+            //die($e->getMessage());
         }
             
     }

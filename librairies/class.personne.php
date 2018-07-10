@@ -47,8 +47,11 @@
         
         public function get_listInfos() {
             
+            $shortDesc = substr($this->description,0,85).'...';
+            
             return array(   'numero'=>$this->numero,
                             'identite'=>$this->identite,
+                            'description'=>$shortDesc,
                             'urlAvatar'=>$this->urlAvatar    );
             
         }

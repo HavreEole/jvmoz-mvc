@@ -14,7 +14,7 @@ body {
         background: url('bg-blue.png'), #4b4e6d;
     }
     main {
-        background: url('bg-light.png'), #eee5e5;
+        /*! background: url('bg-light.png'), #eee5e5; */
     }
 }
 
@@ -38,9 +38,9 @@ body {
 
     main {
         display: block; /* IE */
-        background-color: #eee5e5;
+        background-color: #4a4b57;
         box-shadow: 0 4px 10px #1a1b26;
-        border-bottom: 4px solid #8286a8;
+        border-bottom: 4px solid #6c6d78;
     }
 
     footer {
@@ -56,7 +56,7 @@ body {
                 background-color: #218c9a;
                 border: 0 solid #28afb0;
                 border-width: 0 5px;
-                box-shadow: 4px 4px 0 #dbd3d3;
+                box-shadow: 4px 4px 0 #383945;
                 color: white;
                 font-variant: small-caps;
                 font-weight: normal;
@@ -153,7 +153,7 @@ body {
 
         main>div {
             margin: 0 auto;
-            padding-top: 40px;
+            padding-top: 50px;
             max-width: 1280px;
             text-align: center;
         }
@@ -164,17 +164,17 @@ body {
             }
 
                 #menuListStyles>section>header {
-                    margin: 22px auto 7px;
+                    margin: 22px auto 10px;
                     padding: 5px 20px 5px 20px;
-                    background-color: #4e527b;
-                    border: 0 solid #8286a8;
+                    background-color: #ededed;
+                    border: 0 solid #a6a7b1;
                     border-width: 0 5px;
-                    box-shadow: 4px 4px 0 #dbd3d3;
+                    box-shadow: 4px 4px 0 #383945;
                     text-align: left;
-                    color: #d0d1ea;
+                    color: #575a7e;
                     column-count: 2;
                     column-gap: 40px;
-                    column-rule: 1px solid #8286a8;
+                    column-rule: 1px solid #a6a7b1;
                 }
 
                 menu {
@@ -183,19 +183,17 @@ body {
                     margin: 20px 0;
                     padding: 0;
                     min-width: 170px;
-                    background-color: #d1c5c5;
-                    border: 1px solid #bca6a6;
-                    border-right-color: #fff;
-                    border-bottom-color: #fff;
-                    border-radius: 5px;
                     overflow: hidden;
+                    box-shadow: 4px 4px 0 #383945;
+                    background-color: #4e527b;
+                    border: 0 solid #8b8db4;
+                    border-width: 0 5px;
                 }
 
 
 
         @media (min-width: 800px) {
             menu {
-                background: url('bg-dark.png'), #d1c5c5;
             }
         }
 
@@ -208,8 +206,6 @@ body {
             }
             menu {
                 border: none;
-                border-radius: 0;
-                box-shadow: 0 6px 0 #dbd3d3;
             }
         }
 
@@ -241,8 +237,7 @@ body {
                     margin: 0 0 20px;
                     padding: 1px 3%;
                     background-color: #727393;
-                    border: 1px solid #5e628b;
-                    box-shadow: 0 4px 0 #bcabab;
+                    box-shadow: 0 4px 5px #3a3a4e;
                     color: #d0d1ea;
                     font-variant: small-caps;
                     font-weight: normal;
@@ -253,10 +248,11 @@ body {
 
                 menu a h4 {
                     margin: 0;
-                    padding: 0 3% 2px;
-                    border-top-color: #218c9a;
+                    padding: 2px 3% 4px;
+                    border-top: 1px solid #227c8a;
                     font-size: 1.3rem;
                     font-variant: normal;
+                    box-shadow: inset 0 3px 3px #133f47;
                 }
 
                 @media (max-width: 800px) {
@@ -289,18 +285,18 @@ body {
 
                         menu ul li a {
                             padding : 1px 8px 1px 0;
-                            background-color: #4b4e6d;
+                            background-color: #a7a8cf;
                             border-radius: 20px 6px 6px 20px;
-                            box-shadow: 1px 1px 1px #8e7f7f;
-                            color: #d0d1ea;
+                            color: #37384b;
                             cursor: pointer;
                             text-decoration: none;
                             text-align: center;
+                            box-shadow: 1px 1px 1px #3b3b3b;
                         }
 
                         menu ul li a:hover {
-                            background-color: #57597b;
-                            color: #eee5e5;
+                            background-color: #4f9ea8;
+                            color: #fff;
                         }
 
                             menu ul li a span {
@@ -308,7 +304,7 @@ body {
                                 margin : -2px 5px 0 -5px;
                                 padding: 4px 5px;
                                 min-width: 1.4rem;
-                                background-color: #777893;
+                                background-color: #8b8db4;
                                 border : 1px solid #b0b1d3;
                                 border-width: 0 1px 2px 0;
                                 border-radius: 20px;
@@ -331,10 +327,10 @@ body {
                     /* "voir plus" */
 
                     menu ul form {
-                        margin: 16px 0 20px 0;
+                        margin: 15px 0 15px 3px;
                         padding: 2px 0 2px 25px;
-                        background-color: #b7a6a6;
-                        border-radius: 20px 0 0 20px;
+                        background-color: #218c9a;
+                        border-radius: 2px 0 0 20px;
                     }
 
                     @media (max-width: 800px) {
@@ -389,10 +385,9 @@ body {
                 margin-top: 10px;
                 margin-bottom: 15px;
                 padding: 0 2px 6px 2px;
-                background-color: #218c9a;
-                border: 0 solid #28afb0;
-                border-width: 5px;
-                box-shadow: 4px 4px 0 #dbd3d3;
+                box-shadow: 4px 4px 0 #383945;
+                background-color: #4e527b;
+                border: 5px solid #8b8db4;
             }
 
                 #personnesListe h1 span {
@@ -410,7 +405,7 @@ body {
                 margin-top: 10px;
                 margin-bottom: 10px;
                 background-color: #ffffff;
-                box-shadow: 3px 3px 0 #dbd3d3;
+                box-shadow: 3px 3px 0 #383945;
                 border-radius: 2px;
                 color: #575a7e;
                 cursor: pointer;
@@ -425,10 +420,10 @@ body {
                 #personnesListe div img {
                     width: 100%;
                     min-height: 100px;
-                    border: 1px solid #f8f0f0;
+                    /*! border: 1px solid #787878; */
                 }
 
-                #personnesListe div span {
+                #personnesListe div span:not(.myDescr) {
                     display: inline-block;
                     width: 98%;
                     padding: 0px 8px;
@@ -440,6 +435,26 @@ body {
                     font-weight: bold;
                 }
 
+                #personnesListe div span.myDescr {
+                    display: block;
+                    overflow: hidden;
+                    max-height: 0;
+                    padding: 0 10px;
+                    text-align: left;
+                    background-color: #efefef;
+                    box-shadow: inset 0 4px 4px #bfbfbf, inset 0 -8px 8px #efefef;
+                    color: #545454;
+                    border: 0 solid #adadad;
+                    border-width: 0 4px;
+                    -webkit-transition: max-height 2s, padding 2s;
+                    transition: max-height 2s, padding 2s;
+                }
+
+                #personnesListe div:hover span.myDescr {
+                    max-height: 100px;
+                    padding: 10px;
+                }
+
 
             /* "Voir plus" */
 
@@ -447,16 +462,16 @@ body {
                 margin: 12px 0 20px 0;
                 padding: 8px 0;
                 width: 100%;
-                background-color: #4e527b;
-                border: 5px solid #8b8db4;
-                box-shadow: 4px 4px 0 #dbd3d3;
+                box-shadow: 4px 4px 0 #383945;
                 border-radius: 2px;
                 text-align: center;
+                background-color: #218c9a;
+                border: 5px solid #28afb0;
             }
 
                 #personnesListe form input {
                     text-decoration: none;
-                    color: #d0d1ea;
+                    color: white;
                     font-variant: small-caps;
                     font-family: titleFont;
                     font-size: 1.1rem;
@@ -500,7 +515,7 @@ body {
                 margin-top: 0;
                 border: none;
                 border-radius: 0;
-                box-shadow: 0 6px 0 #dbd3d3;
+                box-shadow: 0 6px 0 #383945;
             }
             #commonStyles menu h3 { margin: 0; }
 
@@ -515,15 +530,14 @@ body {
 
             #commonStyles article {
                 text-align: center;    
-                background-color: #d1c5c5;
+                background-color: #ececec;
             }
 
             #commonStyles article {
                 width: 100%;
                 margin-top: 40px;
                 margin-bottom: 20px;
-                border: 0 solid #fff;
-                border-width: 1px 0;
+                box-shadow: 0 6px 0 #383945;
             }
 
             #commonStyles article.subArticle {
@@ -548,6 +562,7 @@ body {
             #commonStyles article div.wrapper {
                 max-width: 1000px;
                 margin: auto;
+                color: #1e8189;
             }
 
 
@@ -559,18 +574,22 @@ body {
                     min-width: 250px;
                 }
 
+                #commonStyles article#personneProfil div div,
+                #commonStyles article.projetProfil div div {
+                    vertical-align: middle;
+                }
+
                 #commonStyles .supArticle div div { border-width: 0; }
                 #commonStyles .formStyle div div { margin: 0 1%; }
 
                 #personneProfil div div:last-child { background-color: #4b4e6d; }
-                .projetProfil div div:first-child { background-color: #d9d0d0; }
+                .projetProfil div div:first-child { background-color: #d7d7d7; }
 
                 .formStyle div div:first-child,
                 .subarticle div div,
                 .formStyle div div.notBlue {
-                    background-color: #d9d0d0;
-                    border: 0 solid white;
-                    border-width: 0 1px 1px 1px;
+                    background-color: #d9e3e7;
+                    border: 1px solid white;
                 }
 
                 .formStyle div div:last-child:not(:only-child):not(.notBlue),
@@ -580,11 +599,11 @@ body {
                     border-width: 0 5px;
                 }
 
-                #commonStyles article:not(.subArticle) .adminList { background-color: #d9d0d0; }
+                #commonStyles article:not(.subArticle) .adminList { background-color: #d9e3e7; }
 
                     #commonStyles article div div p {
                         margin: 15px;
-                        padding: 1px 8px 1px 10px;
+                        padding: 0 8px 0 10px;
                         border-radius: 2px;
                         text-align: left;
                     }
@@ -592,6 +611,23 @@ body {
 
 
                         /* les textes */
+
+                        #commonStyles article#personneProfil div div.col-3-1:nth-child(2) p,
+                        #commonStyles article.projetProfil div div.col-3-1:nth-child(2) p {
+                            padding: 10px;
+                            border: 0 solid #71728f;
+                            border-width: 0 4px;
+                            margin-right: 16px;
+                        }
+
+                        #commonStyles article#personneProfil div div.col-3-1:nth-child(2) p {
+                            box-shadow: 2px 2px 3px #36364d;
+                        }
+
+                        #commonStyles article.projetProfil div div.col-3-1:nth-child(2) p {
+                            box-shadow: 4px 4px 0px #d4d4d4;
+                            border-color: #a5a5a5;
+                        }
 
                         #commonStyles article div p span.hoverMdp {
                             padding: 0 15px;
@@ -606,8 +642,8 @@ body {
                             font-variant: small-caps;
                         }
                         .projetProfil div div p {
-                            background-color: #c6b9b9;
-                            color: #3c2c2c;
+                            background-color: #b6b6b6;
+                            color: #1b2c32;
                         }
 
                         #personneProfil div div p {
@@ -616,10 +652,10 @@ body {
                         }
 
                         .formStyle div div h2 {
-                            background-color: #eee5e5;
+                            background-color: #96bfce;
                             font-variant: small-caps;
                             font-weight: normal;
-                            color: #218c9a;
+                            color: #fff;
                         }
                         .formStyle div div:last-child:not(:only-child):not(.notBlue) h2,
                         .subArticle div div h2 {
@@ -670,14 +706,14 @@ body {
 
                             #commonStyles #personneProfil div div p:not(.tagList) span,
                             #commonStyles .projetProfil div div p:not(.tagList) span {
-                                margin: 0 2px 0 -9px;
+                                margin: 0 2px 0 -10px;
                             }
 
 
                         /* les liens */
 
                         #personneProfil div div p a { color: #d0d1ea; }
-                        .projetProfil div div p a { color: #3e1f1f; }
+                        .projetProfil div div p a { color: #006387; }
                         #commonStyles article div div p a:hover { color: #fff; }
 
 
@@ -686,6 +722,7 @@ body {
                         #commonStyles p.tagList {
                             padding: 0;
                             background-color: initial;
+                            margin: 15px 15px 15px 13px;
                         }
 
                         #commonStyles p.tagList span {
@@ -825,7 +862,7 @@ body {
                         /* les images */
 
                         #personneProfil div div:first-child { background-color: #57597b; }
-                        .projetProfil div div:last-child { background-color: #b7a6a6; }
+                        .projetProfil div div:last-child { background-color: #b9b9b9; }
 
                         #commonStyles article div div img {
                             margin: 5px 1.5% 0 1.5%;
@@ -871,6 +908,7 @@ body {
         @media (min-width: 800px) {
             #commonStyles #personneProfil {
                 background: url('bg-blue.png'), #4b4e6d;
-                box-shadow: inset -4px -4px 4px #373a59;
+                border: 0 solid #51546f;
+                border-width: 5px 0;
             }
         }

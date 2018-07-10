@@ -55,7 +55,7 @@
         $pdo->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
         $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-        $requete = $pdo->prepare('  SELECT numero,prenom,pseudo,nom,urlAvatar FROM mz_personne
+        $requete = $pdo->prepare('  SELECT numero,prenom,pseudo,nom,urlAvatar,description FROM mz_personne
                                     WHERE numero = :numero AND ban = 0');
         $requete->execute(array('numero' => $onePersonnesNum));
         $resultat = $requete->fetch(PDO::FETCH_ASSOC);
